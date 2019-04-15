@@ -15,8 +15,10 @@ const initialState = {
     quotes: [],
     loggingIn: false,
     savingQuotes: false,
-    error: null
-
+    error: null,
+    firstName: '',
+    lastName: '',
+    isRegistering: false,
 }
 
 export const reducer = ( state = initialState, action ) => {

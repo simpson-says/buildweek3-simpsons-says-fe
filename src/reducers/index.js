@@ -26,7 +26,8 @@ const initialState = {
     firstName: '',
     lastName: '',
     isRegistering: false,
-    isLoggedIn: false
+    isLoggedIn: false,
+    savedQuotes: []
 }
 
 export const reducer = ( state = initialState, action ) => {
@@ -50,7 +51,7 @@ export const reducer = ( state = initialState, action ) => {
                 ...state,
                 error: null,
                 fetchingQuotes: true,
-                isLoggedIn: true,
+                // isLoggedIn: true,
                 errorStatusCode: null
             }
         case FETCH_QUOTES_SUCCESS:
@@ -58,7 +59,7 @@ export const reducer = ( state = initialState, action ) => {
                 ...state,
                 fetchingQuotes: false,
                 error: null,
-                isLoggedIn: true,
+                // isLoggedIn: true,
                 quotes: action.payload
             }
         case FETCH_QUOTES_FAILURE:
@@ -66,8 +67,15 @@ export const reducer = ( state = initialState, action ) => {
                 ...state,
                 fetchingQuotes: false,
                 error: action.payload.data.error,
-                isLoggedIn: true,
+                // isLoggedIn: true,
                 errorStatusCode: action.payload.status
+            }
+        case REGISTER_START:
+            return {}
+        case REGISTER_SUCCESS:
+            return {
+                ...state,
+                isLoggedIn: true
             }
         default: 
             return state;

@@ -48,16 +48,16 @@ class Search extends Component {
         margin: '16px auto'
     }
 
-      let characterSearchResultsByName = this.props.quotes.filter((eachQuote) => {
-          return eachQuote.character.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1
-      })
+    //   let characterSearchResultsByName = this.props.quotes.filter((eachQuote) => {
+    //       return eachQuote.character.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1
+    //   })
 
-      let displayQuotesByCharacter = characterSearchResultsByName.map((currentQuote) => {
-        return <div style={quote}>
-            <p><strong>Character:</strong> {currentQuote.character}</p>
-            <p><strong>Quote: </strong>{currentQuote.quote}</p>
-        </div>
-    })
+    //   let displayQuotesByCharacter = characterSearchResultsByName.map((currentQuote) => {
+    //     return <div style={quote}>
+    //         <p><strong>Character:</strong> {currentQuote.character}</p>
+    //         <p><strong>Quote: </strong>{currentQuote.quote}</p>
+    //     </div>
+    // })
 
     let characterSearchResultsByQuote = this.props.quotes.filter((eachQuote) => {
         return eachQuote.quote.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1
@@ -75,7 +75,7 @@ class Search extends Component {
     
     return (
       <div style={container}>
-          <p style={title}>Enter a Character or Keyword to Search</p>
+          <p style={title}>Enter a Keyword to Search</p>
           <input 
             style={input}
             name="name"
@@ -85,7 +85,7 @@ class Search extends Component {
             onChange={this.search}
         />
         <ul>
-    {this.state.search.length >= 3 ? displayQuotesByCharacter : null}
+    {/* {this.state.search.length >= 3 ? displayQuotesByCharacter : null} */}
     {this.state.search.length >= 3 ? displayQuotesByQuote : null}
         </ul>
       </div>

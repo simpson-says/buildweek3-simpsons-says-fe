@@ -14,3 +14,15 @@ export const favoriteQuotes = favoriteSelect => dispatch => {
         })
         .catch(err => console.log(err))
 }
+
+
+export const saveFavorites = savedFavorites => dispatch => {
+    dispatch({ type: SAVE_FAVORITE })
+    return axios
+        .get('URL HERE', savedFavorites)
+        .then(res => {
+            console.log(res)
+
+        })
+        .catch(err => console.log(err))
+}

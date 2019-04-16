@@ -6,6 +6,7 @@ import Search from './components/Search';
 import Favorites from './components/Favorites';
 import Register from './components/Register';
 import Login from './components/Login';
+import simpsonSaysLogo from './img/simpsonSaysLogo.png'
 
 
 class App extends Component {
@@ -17,13 +18,13 @@ class App extends Component {
           {/* <h2>Hi</h2> */}
         </div>
         <div className="navbar">
-          <h3>Simpsons Says</h3>
-          <nav className=''>
-            <Link to='/register'>Register</Link>
-            <Link to='/login'>Log In</Link>
-            <Link to='/favorites'>Favorites</Link>
-            <Link to='/search'>Search for a Quote</Link>
-            <Link to='generator'>Quote Generator</Link>
+          <img className="navimg" src={simpsonSaysLogo} alt="logo" />
+          <nav className='navlinks'>
+            <Link className="link" to='/register'>Register</Link>
+            <Link className="link" to='/login'>Log In</Link>
+            <Link className="link" to='/favorites'>Favorites</Link>
+            <Link className="link" to='/search'>Search for a Quote</Link>
+            <Link className="link" to='generator'>Quote Generator</Link>
           </nav>
         </div>
         <Route exact path='/register' component={Register} />

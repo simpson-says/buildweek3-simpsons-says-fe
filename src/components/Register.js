@@ -6,9 +6,6 @@ import { Link } from 'react-router-dom'
 class Register extends Component {
     state = {
         newCredentials: {
-            firstName: '',
-            lastName: '',
-            userEmail: '',
             username: '',
             password: ''
         }
@@ -27,7 +24,7 @@ class Register extends Component {
     register = e => {
         e.preventDefault();
         this.props.register(this.state.newCredentials).then(() => {
-
+            this.props.history.push('/favorites')
         })
     }
 
@@ -38,27 +35,6 @@ class Register extends Component {
           <h2>Please Register to Continue</h2>
           <p>If you have already registered, please <Link exact to='/login'>Log In</Link></p>
         <form>
-            <input 
-                type="text"
-                name="name"
-                placeholder="First Name"
-                value={this.state.newCredentials.firstName}
-                onChange={this.handleChange}
-            />
-            <input
-                type="text"
-                name="lastname"
-                placeholder="Last Name"
-                value={this.state.newCredentials.lastName}
-                onChange={this.handleChange}
-            />
-            <input
-                type="email"
-                name="email"
-                placeholder="Email"
-                value={this.state.newCredentials.email}
-                onChange={this.handleChange}
-            />
             <input 
                 type="text"
                 name="username"

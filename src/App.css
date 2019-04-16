@@ -40,5 +40,22 @@
   justify-content: space-between;
   text-align: center;
   align-items: center;
+  border-bottom: 2px solid #fed817;
+  height: 65px;
   /* flex-direction: row; */
+}
+
+.navimg {
+  width: 10%
+}
+
+.navlinks {
+  text-decoration: none;
+}
+
+.link {
+  text-decoration: none;
+  width: 5%;
+  padding: 0 0 10px;
+  border: 1px solid 
 }

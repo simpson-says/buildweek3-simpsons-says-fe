@@ -10,6 +10,13 @@ import {
     LOGIN_FAILURE
 } from '../actions/login'
 
+import {
+    REGISTER_START,
+    REGISTER_SUCCESS,
+    REGISTER_FAILURE
+} from '../actions/register'
+
+
 const initialState = {
     fetchingQuotes: false,
     quotes: [],
@@ -19,6 +26,7 @@ const initialState = {
     firstName: '',
     lastName: '',
     isRegistering: false,
+    isLoggedIn: false
 }
 
 export const reducer = ( state = initialState, action ) => {
@@ -34,13 +42,15 @@ export const reducer = ( state = initialState, action ) => {
             return {
                 ...state,
                 error: null,
-                loggingIn: false
+                loggingIn: false,
+                isLoggedIn: true
             };
         case FETCH_QUOTES_START:
             return {
                 ...state,
                 error: null,
                 fetchingQuotes: true,
+                isLoggedIn: true,
                 errorStatusCode: null
             }
         case FETCH_QUOTES_SUCCESS:
@@ -48,6 +58,7 @@ export const reducer = ( state = initialState, action ) => {
                 ...state,
                 fetchingQuotes: false,
                 error: null,
+                isLoggedIn: true,
                 quotes: action.payload
             }
         case FETCH_QUOTES_FAILURE:
@@ -55,6 +66,7 @@ export const reducer = ( state = initialState, action ) => {
                 ...state,
                 fetchingQuotes: false,
                 error: action.payload.data.error,
+                isLoggedIn: true,
                 errorStatusCode: action.payload.status
             }
         default: 

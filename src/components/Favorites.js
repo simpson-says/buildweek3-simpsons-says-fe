@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 
-export default class Favorites extends Component {
+class Favorites extends Component {
+
+    
   render() {
     return (
       <div>
@@ -9,3 +11,6 @@ export default class Favorites extends Component {
     )
   }
 }
+
+
+export default Favorites

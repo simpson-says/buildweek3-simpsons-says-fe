@@ -13,8 +13,14 @@ export const register = userInfo => dispatch => {
     return axios
         .post('https://simpson-says-backend.herokuapp.com/api/register', userInfo)
         .then(res => {
-            localStorage.setItem('token', res.data.payload)
-            console.log(res)
+            localStorage.setItem('token', res.data.token)
+            console.log(res.data)
+            dispatch({ type: REGISTER_SUCCESS })
         })
-        .catch(err => console.log(err))
+        .catch(err => {
+            console.log(err)
+            dispatch({ type: REGISTER_FAILURE })
+        })
 }
+
+

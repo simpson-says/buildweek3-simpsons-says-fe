@@ -19,7 +19,7 @@ class Search extends Component {
     }
 
   render() {
-    //   console.log(this.props.quotes)
+      console.log(this.props.quotes)
     const container = {
         width: '60%',
         margin: '16px auto',

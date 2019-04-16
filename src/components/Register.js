@@ -49,7 +49,7 @@ class Register extends Component {
                 value={this.state.newCredentials.password}
                 onChange={this.handleChange}
             />
-            <button>Sign Up</button>
+            <button onClick={this.register}>Sign Up</button>
         </form>
       </div>
     )

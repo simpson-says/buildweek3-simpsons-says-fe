@@ -16,6 +16,14 @@ import {
     REGISTER_FAILURE
 } from '../actions/register'
 
+import {
+    SELECT_FAVORITE,
+    SELECT_FAVORITE_SUCCESS,
+    SELECT_FAVORITE_FAILURE,
+    SAVE_FAVORITE,
+    SHOW_FAVORITE,
+    LIKED
+} from '../actions/favorites'
 
 const initialState = {
     fetchingQuotes: false,
@@ -27,7 +35,9 @@ const initialState = {
     lastName: '',
     isRegistering: false,
     isLoggedIn: false,
-    savedQuotes: []
+    savedQuotes: [],
+    isClicked: false,
+    cat: false
 }
 
 export const reducer = ( state = initialState, action ) => {
@@ -45,7 +55,16 @@ export const reducer = ( state = initialState, action ) => {
                 error: null,
                 loggingIn: false,
                 isLoggedIn: true
+                
+
             };
+        case LOGIN_FAILURE:
+            return {
+                ...state,
+                error: null,
+                loggingIn: false,
+                isLoggedIn: false
+            }
         case FETCH_QUOTES_START:
             return {
                 ...state,
@@ -71,11 +90,24 @@ export const reducer = ( state = initialState, action ) => {
                 errorStatusCode: action.payload.status
             }
         case REGISTER_START:
-            return {}
+            return {
+                ...state,
+                isLoggedIn: false
+            }
         case REGISTER_SUCCESS:
             return {
                 ...state,
                 isLoggedIn: true
+            }
+        case SELECT_FAVORITE_SUCCESS: 
+            return {
+                ...state,
+                // isClicked: !state.isClicked
+            }
+        case LIKED: 
+            return {
+                ...state,
+                isClicked: !state.isClicked
             }
         default: 
             return state;

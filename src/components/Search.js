@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { getData } from '../actions/quoteData'
+import { favoriteQuotes, saveFavorites } from '../actions/favorites'
 import axiosWithAuth from '../utils/axiosWithAuth'
 import simpsonSaysLogo from '../img/simpsonSaysLogo.png'
 import '../App.css'
@@ -9,9 +10,11 @@ import {
     FETCH_QUOTES_SUCCESS,
     FETCH_QUOTES_FAILURE
 } from '../actions/quoteData'
-
-
 import axios from 'axios'
+import starEmpty from '../img/starEmpty.svg'
+import starFull from '../img/starFull.svg'
+
+
 
 class Search extends Component {
     state = {
@@ -37,6 +40,15 @@ class Search extends Component {
             search: e.target.value,
             throttleTimer: newTimer
         })
+    }
+
+    selectFavorite = id => {
+        console.log(id)
+        this.props.favoriteQuotes(id)
+    }
+
+    saveSelectedFaves = id => {
+        this.props.saveFavorites(id)
     }
 
   render() {
@@ -71,19 +83,10 @@ class Search extends Component {
 
     const p = {
         textAlign: 'center'
-        
     }
 
-    //   let characterSearchResultsByName = this.props.quotes.filter((eachQuote) => {
-    //       return eachQuote.character.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1
-    //   })
-
-    //   let displayQuotesByCharacter = characterSearchResultsByName.map((currentQuote) => {
-    //     return <div style={quote}>
-    //         <p><strong>Character:</strong> {currentQuote.character}</p>
-    //         <p><strong>Quote: </strong>{currentQuote.quote}</p>
-    //     </div>
-    // })
+    let blankStar = <img  src={starEmpty} alt="Not Selected" />
+    let clickedStar = <img src={starFull} alt="Selected" />
 
     let characterSearchResultsByQuote = this.props.quotes.filter((eachQuote) => {
         return eachQuote.quote.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1
@@ -91,9 +94,10 @@ class Search extends Component {
 
     let displayQuotesByQuote = characterSearchResultsByQuote.map((currentQuote) => {
         return (
-        <div style={quote}>
+        <div onClick={this.selectFavorite} style={quote}>
             <p><strong>Character: </strong>{currentQuote.character}</p>
             <p><strong>Quote: </strong>{currentQuote.quote}</p>
+            { this.props.isClicked ? clickedStar : blankStar }
         </div>
         )
     })
@@ -114,7 +118,6 @@ class Search extends Component {
         <p style={p}>Select your Favorite Quotes Below</p>
         <button className="registerButton">Save Your Chosen Favorites</button>
         <ul>
-    {/* {this.state.search.length >= 3 ? displayQuotesByCharacter : null} */}
     {this.state.search.length >= 3 ? displayQuotesByQuote : null}
         </ul>
       </div>
@@ -123,11 +126,12 @@ class Search extends Component {
 }
 
 
-const mapStateToProps = ({ isLoggedIn, error, quotes }) => ({
+const mapStateToProps = ({ isLoggedIn, error, quotes, isClicked }) => ({
     error,
     isLoggedIn,
-    quotes
+    quotes,
+    isClicked
 })
 
-export default connect(mapStateToProps, { getData })(Search)
+export default connect(mapStateToProps, { getData, favoriteQuotes, saveFavorites })(Search)
 

@@ -31,7 +31,10 @@ export const saveFavorites = id => dispatch => {
         .post('http://localhost:5000/api/friends', id)
         .then(res => {
             console.log(res)
-
+            dispatch({ type: SAVE_FAVORITE_SUCCESS, payload: res.data })
         })
-        .catch(err => console.log(err))
+        .catch(err => {
+            dispatch({ type: SAVE_FAVORITE_FAILURE })
+            console.log(err)
+        })
 }

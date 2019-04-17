@@ -28,9 +28,11 @@ class Login extends Component {
 
   render() {
     return (
-      <div>
-        <form>
+      <div className="registerContainer">
+          <h1>Log In</h1>
+        <form className="registerForm">
             <input 
+                className="registerInput"
                 type="text"
                 name="username"
                 placeholder="Username"
@@ -38,13 +40,14 @@ class Login extends Component {
                 onChange={this.handleChange}
             />
             <input 
+                className="registerInput"
                 type="password"
                 name="password"
                 placeholder="Password"
                 value={this.state.credentials.password}
                 onChange={this.handleChange}
             />
-            <button onClick={this.login}>Log In</button>
+            <button className="registerButton" onClick={this.login}>Log In</button>
         </form>
       </div>
     )

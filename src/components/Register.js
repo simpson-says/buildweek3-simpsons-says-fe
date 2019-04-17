@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { register } from '../actions/register'
 import { Link } from 'react-router-dom'
+import '../App.css';
 
 class Register extends Component {
     state = {
@@ -30,12 +31,13 @@ class Register extends Component {
 
   render() {
     return (
-      <div>
+      <div className="registerContainer">
           <h1>Welcome to Simpsons Says</h1>
           <h2>Please Register to Continue</h2>
           <p>If you have already registered, please <Link exact to='/login'>Log In</Link></p>
-        <form>
+        <form className="registerForm">
             <input 
+                className='registerInput'
                 type="text"
                 name="username"
                 placeholder="Username"
@@ -43,13 +45,14 @@ class Register extends Component {
                 onChange={this.handleChange}
             />
             <input 
+                className='registerInput'
                 type="password"
                 name="password"
                 placeholder="Password"
                 value={this.state.newCredentials.password}
                 onChange={this.handleChange}
             />
-            <button onClick={this.register}>Sign Up</button>
+            <button className='registerButton' onClick={this.register}>Sign Up</button>
         </form>
       </div>
     )

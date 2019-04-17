@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { getData } from '../actions/quoteData'
 import axiosWithAuth from '../utils/axiosWithAuth'
+import simpsonSaysLogo from '../img/simpsonSaysLogo.png'
+import '../App.css'
 import {
     FETCH_QUOTES_START,
     FETCH_QUOTES_SUCCESS,
@@ -67,6 +69,11 @@ class Search extends Component {
         margin: '16px auto'
     }
 
+    const p = {
+        textAlign: 'center'
+        
+    }
+
     //   let characterSearchResultsByName = this.props.quotes.filter((eachQuote) => {
     //       return eachQuote.character.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1
     //   })
@@ -94,6 +101,7 @@ class Search extends Component {
     
     return (
       <div style={container}>
+        <img className="searchLogo" src={simpsonSaysLogo} alt="logo" />
           <p style={title}>Enter a Keyword to Search</p>
           <input 
             style={input}
@@ -103,6 +111,8 @@ class Search extends Component {
             value={this.state.search}
             onChange={this.search}
         />
+        <p style={p}>Select your Favorite Quotes Below</p>
+        <button className="registerButton">Save Your Chosen Favorites</button>
         <ul>
     {/* {this.state.search.length >= 3 ? displayQuotesByCharacter : null} */}
     {this.state.search.length >= 3 ? displayQuotesByQuote : null}

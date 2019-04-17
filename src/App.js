@@ -6,10 +6,11 @@ import Search from './components/Search';
 import Favorites from './components/Favorites';
 import Register from './components/Register';
 import Login from './components/Login';
-import simpsonSaysLogo from './img/simpsonSaysLogo.png'
+import logo2 from './img/logo2.png'
 
 
 class App extends Component {
+  
   render() {
     
     return (
@@ -18,7 +19,7 @@ class App extends Component {
           {/* <h2>Hi</h2> */}
         </div>
         <div className="navbar">
-          <img className="navimg" src={simpsonSaysLogo} alt="logo" />
+          <img className="navimg" src={logo2} alt="logo" />
           <nav className='navlinks'>
             <Link className="link" to='/register'>Register</Link>
             <Link className="link" to='/login'>Log In</Link>

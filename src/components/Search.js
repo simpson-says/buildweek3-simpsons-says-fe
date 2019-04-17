@@ -1,20 +1,39 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { getData } from '../actions/quoteData'
+import axiosWithAuth from '../utils/axiosWithAuth'
+import {
+    FETCH_QUOTES_START,
+    FETCH_QUOTES_SUCCESS,
+    FETCH_QUOTES_FAILURE
+} from '../actions/quoteData'
+
+
+import axios from 'axios'
 
 class Search extends Component {
     state = {
         quotes: [],
-        search: ''
+        search: '',
+        throttleTimer: null
     }
 
     componentDidMount() {
-        this.props.getData()
+        // this.props.getData()
     }
 
     search = e => {
+        clearTimeout(this.state.throttleTimer);
+        const newTimer = setTimeout(() => {
+            if ( this.state.search.length < 3 ) {
+                return
+            }
+            console.log('test')
+            this.props.getData()
+        }, 1000)
         this.setState({
-            search: e.target.value
+            search: e.target.value,
+            throttleTimer: newTimer
         })
     }
 

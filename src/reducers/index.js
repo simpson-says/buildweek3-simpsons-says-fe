@@ -27,6 +27,12 @@ import {
     SAVE_FAVORITE_FAILURE
 } from '../actions/favorites'
 
+import {
+    FETCH_RANDOM_QUOTES_START,
+    FETCH_RANDOM_QUOTES_SUCCESS,
+    FETCH_RANDOM_QUOTES_FAILURE
+} from '../actions/randomQuote'
+
 const initialState = {
     fetchingQuotes: false,
     quotes: [],
@@ -109,7 +115,7 @@ export const reducer = ( state = initialState, action ) => {
             }
         case LIKED: 
             const result = state.quotes.map(eachQuote => {
-                if ( eachQuote.id === action.payload.id ) {
+                if ( eachQuote.quote_id === action.payload.quote_id ) {
                     return action.payload
                 } else {
                     return eachQuote
@@ -124,12 +130,12 @@ export const reducer = ( state = initialState, action ) => {
             return {
                 ...state,
                 savingFavorite: false, 
-                savedQuotes: state.quotes.filter(clickedItems => ( clickedItems.liked ))
+                // savedQuotes: state.quotes.filter(clickedItems => ( clickedItems.liked ))
             }
         case SAVE_FAVORITE_SUCCESS: 
             return {
                 ...state,
-                // savedQuotes: state.quotes.filter(clickedItems => ( clickedItems.liked )),
+                savedQuotes: state.quotes.filter(clickedItems => ( clickedItems.liked )),
                 savingFavorite: true
             }
         case SAVE_FAVORITE_FAILURE:

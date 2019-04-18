@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { getRandomQuotes } from '../actions/randomQuote'
 
 class QuoteGenerator extends Component {
   state = {
@@ -31,6 +33,9 @@ class QuoteGenerator extends Component {
   }
 }
 
+const mapStateToProps = ({ }) => {
+
+}
 
 
-export default QuoteGenerator
+export default connect(mapStateToProps, { QuoteGenerator })(QuoteGenerator) 

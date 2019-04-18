@@ -28,22 +28,30 @@ class Search extends Component {
     }
 
     search = e => {
-        clearTimeout(this.state.throttleTimer);
-        const newTimer = setTimeout(() => {
-            if ( this.state.search.length < 3 ) {
-                return
-            }
-            // console.log('test')
-            this.props.getData()
-        }, 1000)
+        // clearTimeout(this.state.throttleTimer);
+        // const newTimer = setTimeout(() => {
+        //     if ( this.state.search.length < 3 ) {
+        //         return
+        //     }
+        //     // console.log('test')
+        //     this.props.getData()
+        // }, 1000)
         this.setState({
-            search: e.target.value,
-            throttleTimer: newTimer
+            search: e.target.value
+            // throttleTimer: newTimer
         })
     }
 
+    submitSearch = e => {
+        e.preventDefault()
+        const searchValue = { searchValue: this.state.search }
+        this.props.getData(searchValue)
+    }
+
+
     selectFavorite = selected => {
         // console.log(id)
+        console.log(selected)
         const update = { ...selected, liked: !selected.liked }
         // console.log(copy)
         this.props.favoriteQuotes(update)
@@ -91,7 +99,7 @@ class Search extends Component {
     let blankStar = <img  src={starEmpty} alt="Not Selected" />
     let clickedStar = <img src={starFull} alt="Selected" />
 
-    // console.log(this.props.quotes)
+    
 
     let characterSearchResultsByQuote = this.props.quotes.filter((eachQuote) => {
         return eachQuote.spoken_words.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1
@@ -111,19 +119,22 @@ class Search extends Component {
         )
     })
 
-    
+    console.log('LOOOOOKKKK!~!', this.props.quotes)
+
     return (
       <div style={container}>
         <img className="searchLogo" src={simpsonSaysLogo} alt="logo" />
           <p style={title}>Enter a Keyword to Search</p>
-          <input 
-            style={input}
-            name="name"
-            type="text"
-            placeholder="Search for a Quote"
-            value={this.state.search}
-            onChange={this.search}
-        />
+          <form onSubmit={this.submitSearch}>
+            <input 
+                style={input}
+                name="name"
+                type="text"
+                placeholder="Search for a Quote"
+                value={this.state.search}
+                onChange={this.search}
+            />
+            </form>
         <p style={p}>Select your Favorite Quotes Below</p>
         <button onClick={this.saveSelectedFaves} className="registerButton">Save Your Chosen Favorites</button>
         

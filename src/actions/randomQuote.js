@@ -6,10 +6,10 @@ export const FETCH_RANDOM_QUOTES_SUCCESS = "FETCH_RANDOM_QUOTES_SUCCESS"
 export const FETCH_RANDOM_QUOTES_FAILURE = 'FETCH_RANDOM_QUOTES_FAILURE'
 
 
-export const getRandomQuotes = () => {
+export const getRandomQuotes = () => dispatch => {
     dispatch({ type: FETCH_RANDOM_QUOTES_START })
     axios
-        .get('URL')
+        .get(`${process.env.REACT_APP_BACKEND_URL}users/generate`)
         .then(res => {
             console.log(res.data)
             dispatch({ type: FETCH_RANDOM_QUOTES_START, payload: res.data })

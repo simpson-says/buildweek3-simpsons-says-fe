@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-import { saveFavoriteList } from './faveAction'
+import { saveFavoriteList, SAVE_FAVORITE_LIST } from './faveAction'
 export const LOGIN_START = 'LOGIN_START'
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS'
 export const LOGIN_FAILURE = 'LOGIN_FAILURE'
@@ -12,8 +12,9 @@ export const login = creds => dispatch => {
         .then(res => {
             // console.log(res.data)
             localStorage.setItem('token', res.data.token)
+            console.log(res.data.favorites)
             saveFavoriteList(res.data.favorites)
-            dispatch({ type: LOGIN_SUCCESS })
+            dispatch({ type: SAVE_FAVORITE_LIST, payload: res.data.favorites })
 
             // console.log(res)
         })

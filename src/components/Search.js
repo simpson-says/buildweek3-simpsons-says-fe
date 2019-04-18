@@ -63,7 +63,7 @@ class Search extends Component {
     }
 
     saveSelectedFaves = () => {
-        this.props.saveFavorites()
+        // this.props.saveFavorites()
     }
 
   render() {
@@ -100,7 +100,7 @@ class Search extends Component {
         textAlign: 'center'
     }
 
-    let blankStar = <img  src={starEmpty} alt="Not Selected" />
+    let blankStar = <img src={starEmpty} alt="Not Selected" />
     let clickedStar = <img src={starFull} alt="Selected" />
 
     console.log('HEEEEEEEEEEEEEEEEEEEEREEEEEEEEEEE FIRST!~!', this.props.quotes)
@@ -109,22 +109,10 @@ class Search extends Component {
         return eachQuote.spoken_words.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1
     })
 
-    let displayQuotesByQuote = characterSearchResultsByQuote.map((currentQuote) => {
-        return (
-        <div onClick={this.selectFavorite} style={quote}>
-            <p><strong>Character: </strong>{currentQuote.raw_character_text}</p>
-            <p><strong>Quote: </strong>{currentQuote.spoken_words}</p>
-            <p><strong>Episode: </strong>{currentQuote.episode_title}</p>
-            <p><strong>Season: </strong>{currentQuote.season}</p>
-            <p><strong>Episode Number in Season: </strong>{currentQuote.number_in_season}</p>
-            
-            { this.props.savedQuotes.includes(currentQuote.quote_id) ? clickedStar : blankStar }
-        </div>
-        )
-    })
+
 
     console.log('LOOOOOKKKK!~! SECOND', this.props.quotes)
-
+    console.log(this.props.savedQuotes)
     return (
       <div style={container}>
         <img className="searchLogo" src={simpsonSaysLogo} alt="logo" />
@@ -144,13 +132,15 @@ class Search extends Component {
         
     {this.state.search.length >= 3 ? characterSearchResultsByQuote.map((currentQuote) => {
         return (
-        <div key={currentQuote.id} onClick={() => this.selectFavorite(currentQuote)} style={quote}>
+        <div key={currentQuote.id} style={quote}>
             <p><strong>Character: </strong>{currentQuote.raw_character_text}</p>
             <p><strong>Quote: </strong>{currentQuote.spoken_words}</p>
             <p><strong>Episode: </strong>{currentQuote.episode_title}</p>
             <p><strong>Season: </strong>{currentQuote.season}</p>
             <p><strong>Episode Number in Season: </strong>{currentQuote.number_in_season}</p>
-            { currentQuote.liked ? clickedStar : blankStar }
+            <div onClick={() => this.props.saveFavorites(currentQuote.quote_id)}>
+            { this.props.savedQuotes.includes(currentQuote.quote_id) ? clickedStar : blankStar }
+            </div>
         </div>
         )
     }) : null}

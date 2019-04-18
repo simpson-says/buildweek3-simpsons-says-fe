@@ -140,7 +140,7 @@ export const reducer = ( state = initialState, action ) => {
         case SAVE_FAVORITE_SUCCESS: 
             return {
                 ...state,
-                savedQuotes: action.payload,
+                // savedQuotes: action.payload,
                 // state.quotes.filter(clickedItems => ( clickedItems.liked )),
                 savingFavorite: false
             }

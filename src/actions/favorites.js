@@ -1,5 +1,8 @@
 import axios from 'axios'
 import axiosWithAuth from '../utils/axiosWithAuth';
+import { store } from '../index'
+import { getState } from 'react-redux'
+import { SAVE_FAVORITE_LIST } from './faveAction';
 
 export const SELECT_FAVORITE = 'SELECT_FAVORITE'
 export const SELECT_FAVORITE_SUCCESS = 'SELECT_FAVORITE_SUCCESS'
@@ -42,9 +45,12 @@ export const favoriteQuotes = ( update ) => dispatch => {
 //         })
 // }
 
-export const saveFavorites = () => dispatch => {
+export const saveFavorites = (quote) => dispatch => {
     // return { type: SAVE_FAVORITE, payload: favorites }
-    dispatch({ type: SAVE_FAVORITE });
+    // dispatch({ type: SAVE_FAVORITE });
+    // console.log("object")
+    let newStore = [ ... store.getState().savedQuotes ]
+    // console.log(newStore)
     const token = localStorage.getItem("token");
     const headers = {
       headers: {
@@ -56,11 +62,21 @@ export const saveFavorites = () => dispatch => {
       .post(
         `https://simpson-says-backend.herokuapp.com/users/favorites`,
         {
-          quoteID: 50
+          quoteID: quote
         },
         headers
       )
       .then(res => {
+          console.log(res)
+          
+          if ( newStore.includes(quote) ) {
+            console.log(newStore.indexOf(quote))
+            newStore.splice(newStore.indexOf(quote), 1)
+          } else {
+            newStore.push(quote)
+          }
+          console.log(newStore)
+        dispatch({ type: SAVE_FAVORITE_LIST, payload: newStore})
         dispatch({ type: SAVE_FAVORITE_SUCCESS, payload: res.data });
       })
       .catch(err => {

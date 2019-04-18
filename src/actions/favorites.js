@@ -29,7 +29,7 @@ export const saveFavorites = favorites => {
     return { type: SAVE_FAVORITE, payload: favorites }
     // dispatch({ type: SAVE_FAVORITE })
     // return axios
-        // .post('http://localhost:5000/api/friends', favorites)
+        // .post(`${process.env.REACT_APP_BACKEND_URL}Users/favorites`, favorites)
         // .then(res => {
             // console.log(res)
             // dispatch({ type: SAVE_FAVORITE_SUCCESS, payload: res.data })

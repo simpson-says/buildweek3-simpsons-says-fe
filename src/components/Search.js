@@ -91,17 +91,21 @@ class Search extends Component {
     let blankStar = <img  src={starEmpty} alt="Not Selected" />
     let clickedStar = <img src={starFull} alt="Selected" />
 
-    console.log(this.props.quotes)
+    // console.log(this.props.quotes)
 
     let characterSearchResultsByQuote = this.props.quotes.filter((eachQuote) => {
-        return eachQuote.quote.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1
+        return eachQuote.spoken_words.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1
     })
 
     let displayQuotesByQuote = characterSearchResultsByQuote.map((currentQuote) => {
         return (
         <div onClick={this.selectFavorite} style={quote}>
-            <p><strong>Character: </strong>{currentQuote.character}</p>
-            <p><strong>Quote: </strong>{currentQuote.quote}</p>
+            <p><strong>Character: </strong>{currentQuote.raw_character_text}</p>
+            <p><strong>Quote: </strong>{currentQuote.spoken_words}</p>
+            <p><strong>Episode: </strong>{currentQuote.episode_title}</p>
+            <p><strong>Season: </strong>{currentQuote.season}</p>
+            <p><strong>Episode Number in Season: </strong>{currentQuote.number_in_season}</p>
+            
             { this.props.isClicked ? clickedStar : blankStar }
         </div>
         )
@@ -126,8 +130,11 @@ class Search extends Component {
     {this.state.search.length >= 3 ? characterSearchResultsByQuote.map((currentQuote) => {
         return (
         <div key={currentQuote.id} onClick={() => this.selectFavorite(currentQuote)} style={quote}>
-            <p><strong>Character: </strong>{currentQuote.character}</p>
-            <p><strong>Quote: </strong>{currentQuote.quote}</p>
+            <p><strong>Character: </strong>{currentQuote.raw_character_text}</p>
+            <p><strong>Quote: </strong>{currentQuote.spoken_words}</p>
+            <p><strong>Episode: </strong>{currentQuote.episode_title}</p>
+            <p><strong>Season: </strong>{currentQuote.season}</p>
+            <p><strong>Episode Number in Season: </strong>{currentQuote.number_in_season}</p>
             { currentQuote.liked ? clickedStar : blankStar }
         </div>
         )

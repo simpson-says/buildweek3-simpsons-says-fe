@@ -25,16 +25,17 @@ export const favoriteQuotes = ( update ) => dispatch => {
 }
 
 
-export const saveFavorites = id => dispatch => {
-    dispatch({ type: SAVE_FAVORITE })
-    return axios
-        .post('http://localhost:5000/api/friends', id)
-        .then(res => {
+export const saveFavorites = favorites => {
+    return { type: SAVE_FAVORITE, payload: favorites }
+    // dispatch({ type: SAVE_FAVORITE })
+    // return axios
+        // .post('http://localhost:5000/api/friends', favorites)
+        // .then(res => {
             // console.log(res)
-            dispatch({ type: SAVE_FAVORITE_SUCCESS, payload: res.data })
-        })
-        .catch(err => {
-            dispatch({ type: SAVE_FAVORITE_FAILURE })
+            // dispatch({ type: SAVE_FAVORITE_SUCCESS, payload: res.data })
+        // })
+        // .catch(err => {
+            // dispatch({ type: SAVE_FAVORITE_FAILURE })
             // console.log(err)
-        })
+        // })
 }

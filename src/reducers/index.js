@@ -123,12 +123,13 @@ export const reducer = ( state = initialState, action ) => {
         case SAVE_FAVORITE:
             return {
                 ...state,
-                savingFavorite: false
+                savingFavorite: false, 
+                savedQuotes: state.quotes.filter(clickedItems => ( clickedItems.liked ))
             }
         case SAVE_FAVORITE_SUCCESS: 
             return {
                 ...state,
-                savedQuotes: state.quotes.filter(clickedItems => ( clickedItems.liked )),
+                // savedQuotes: state.quotes.filter(clickedItems => ( clickedItems.liked )),
                 savingFavorite: true
             }
         case SAVE_FAVORITE_FAILURE:

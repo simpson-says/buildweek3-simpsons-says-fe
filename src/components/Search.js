@@ -50,8 +50,8 @@ class Search extends Component {
 
     }
 
-    saveSelectedFaves = id => {
-        this.props.saveFavorites(id)
+    saveSelectedFaves = () => {
+        this.props.saveFavorites()
     }
 
   render() {

@@ -33,7 +33,7 @@ class Search extends Component {
             if ( this.state.search.length < 3 ) {
                 return
             }
-            console.log('test')
+            // console.log('test')
             this.props.getData()
         }, 1000)
         this.setState({
@@ -42,9 +42,12 @@ class Search extends Component {
         })
     }
 
-    selectFavorite = id => {
-        console.log(id)
-        this.props.favoriteQuotes(id)
+    selectFavorite = selected => {
+        // console.log(id)
+        const update = { ...selected, liked: !selected.liked }
+        // console.log(copy)
+        this.props.favoriteQuotes(update)
+
     }
 
     saveSelectedFaves = id => {
@@ -52,7 +55,7 @@ class Search extends Component {
     }
 
   render() {
-      console.log(this.props.quotes)
+    //   console.log(this.props.quotes)
     const container = {
         width: '60%',
         margin: '16px auto',
@@ -88,6 +91,8 @@ class Search extends Component {
     let blankStar = <img  src={starEmpty} alt="Not Selected" />
     let clickedStar = <img src={starFull} alt="Selected" />
 
+    console.log(this.props.quotes)
+
     let characterSearchResultsByQuote = this.props.quotes.filter((eachQuote) => {
         return eachQuote.quote.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1
     })
@@ -116,10 +121,18 @@ class Search extends Component {
             onChange={this.search}
         />
         <p style={p}>Select your Favorite Quotes Below</p>
-        <button className="registerButton">Save Your Chosen Favorites</button>
-        <ul>
-    {this.state.search.length >= 3 ? displayQuotesByQuote : null}
-        </ul>
+        <button onClick={this.saveSelectedFaves} className="registerButton">Save Your Chosen Favorites</button>
+        
+    {this.state.search.length >= 3 ? characterSearchResultsByQuote.map((currentQuote) => {
+        return (
+        <div key={currentQuote.id} onClick={() => this.selectFavorite(currentQuote)} style={quote}>
+            <p><strong>Character: </strong>{currentQuote.character}</p>
+            <p><strong>Quote: </strong>{currentQuote.quote}</p>
+            { currentQuote.liked ? clickedStar : blankStar }
+        </div>
+        )
+    }) : null}
+        
       </div>
     )
   }

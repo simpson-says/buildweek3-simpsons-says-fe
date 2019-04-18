@@ -22,7 +22,9 @@ import {
     SELECT_FAVORITE_FAILURE,
     SAVE_FAVORITE,
     SHOW_FAVORITE,
-    LIKED
+    LIKED,
+    SAVE_FAVORITE_SUCCESS,
+    SAVE_FAVORITE_FAILURE
 } from '../actions/favorites'
 
 const initialState = {
@@ -37,7 +39,8 @@ const initialState = {
     isLoggedIn: false,
     savedQuotes: [],
     isClicked: false,
-    cat: false
+    cat: false,
+    savingFavorite: false
 }
 
 export const reducer = ( state = initialState, action ) => {
@@ -105,10 +108,31 @@ export const reducer = ( state = initialState, action ) => {
                 // isClicked: !state.isClicked
             }
         case LIKED: 
+            const result = state.quotes.map(eachQuote => {
+                if ( eachQuote.id === action.payload.id ) {
+                    return action.payload
+                } else {
+                    return eachQuote
+                }
+            })
             return {
                 ...state,
-                isClicked: !state.isClicked
+                // isClicked: !state.isClicked,
+                quotes: result
             }
+        case SAVE_FAVORITE:
+            return {
+                ...state,
+                savingFavorite: false
+            }
+        case SAVE_FAVORITE_SUCCESS: 
+            return {
+                ...state,
+                savedQuotes: state.quotes.filter(clickedItems => ( clickedItems.liked )),
+                savingFavorite: true
+            }
+        case SAVE_FAVORITE_FAILURE:
+            return {}
         default: 
             return state;
     }

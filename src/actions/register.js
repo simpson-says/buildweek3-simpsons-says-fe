@@ -14,11 +14,11 @@ export const register = userInfo => dispatch => {
         .post(`${process.env.REACT_APP_BACKEND_URL}api/register`, userInfo)
         .then(res => {
             localStorage.setItem('token', res.data.token)
-            console.log(res.data)
+            // console.log(res.data)
             dispatch({ type: REGISTER_SUCCESS })
         })
         .catch(err => {
-            console.log(err)
+            // console.log(err)
             dispatch({ type: REGISTER_FAILURE })
         })
 }

@@ -13,10 +13,10 @@ export const getData = () => dispatch => {
         .get('http://localhost:5000/api/friends')
         .then(res => {
             console.log(res.data)
-            dispatch({ type: FETCH_QUOTES_SUCCESS, payload: res.data })
+            dispatch({ type: FETCH_QUOTES_SUCCESS, payload: res.data /*.data*/ })
         })
         .catch(err => {
-            console.log(err.response)
+            // console.log(err.response)
             dispatch({ type: FETCH_QUOTES_FAILURE, payload: err.response })
         })
 }

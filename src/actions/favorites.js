@@ -9,13 +9,13 @@ export const SAVE_FAVORITE_FAILURE = "SAVE_FAVORITE_FAILURE"
 export const SHOW_FAVORITE = 'SHOW_FAVORITE'
 export const LIKED = 'LIKED'
 
-export const favoriteQuotes = id => dispatch => {
+export const favoriteQuotes = ( update ) => dispatch => {
     dispatch({ type: SELECT_FAVORITE })
-    dispatch({ type: LIKED })
+    dispatch({ type: LIKED, payload: update })
     return axios
-        .get(`http://localhost:5000/api/friends`, id)
+        .get(`http://localhost:5000/api/friends/${update.id}`)
         .then(res => {
-            console.log("HELLO", res)
+            // console.log("HELLO", res)
             dispatch({ type: SELECT_FAVORITE_SUCCESS, payload: res.data })
         })
         .catch(err => {
@@ -30,11 +30,11 @@ export const saveFavorites = id => dispatch => {
     return axios
         .post('http://localhost:5000/api/friends', id)
         .then(res => {
-            console.log(res)
+            // console.log(res)
             dispatch({ type: SAVE_FAVORITE_SUCCESS, payload: res.data })
         })
         .catch(err => {
             dispatch({ type: SAVE_FAVORITE_FAILURE })
-            console.log(err)
+            // console.log(err)
         })
 }

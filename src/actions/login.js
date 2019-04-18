@@ -9,13 +9,13 @@ export const login = creds => dispatch => {
     return axios
         .post(`${process.env.REACT_APP_BACKEND_URL}api/login`, creds)
         .then(res => {
-            console.log(res.data)
+            // console.log(res.data)
             localStorage.setItem('token', res.data.token)
             dispatch({ type: LOGIN_SUCCESS })
-            console.log(res)
+            // console.log(res)
         })
         .catch(err => {
-            console.log(err)
+            // console.log(err)
             dispatch({ type: LOGIN_FAILURE })
         })
 }

@@ -1,4 +1,5 @@
 import axios from 'axios'
+import axiosWithAuth from '../utils/axiosWithAuth';
 
 export const SELECT_FAVORITE = 'SELECT_FAVORITE'
 export const SELECT_FAVORITE_SUCCESS = 'SELECT_FAVORITE_SUCCESS'
@@ -29,8 +30,8 @@ export const favoriteQuotes = ( update ) => dispatch => {
 export const saveFavorites = () => dispatch => {
     // return { type: SAVE_FAVORITE, payload: favorites }
     dispatch({ type: SAVE_FAVORITE })
-    return axios
-        .post(`${process.env.REACT_APP_BACKEND_URL}Users/favorites`, {quoteID: 5})
+    return axiosWithAuth()
+        .post(`https://simpson-says-backend.herokuapp.com/users/favorites`, {quoteID: 141351})
         .then(res => {
             console.log("HELLLOOOOOOOO", res)
             dispatch({ type: SAVE_FAVORITE_SUCCESS, payload: res.data })

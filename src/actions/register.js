@@ -11,7 +11,7 @@ export const REGISTER_FAILURE = 'REGISTER_FAILURE'
 export const register = userInfo => dispatch => {
     dispatch({ type: REGISTER_START })
     return axios
-        .post(`${process.env.REACT_APP_BACKEND_URL}api/register`, userInfo)
+        .post(`https://simpson-says-backend.herokuapp.com/api/register`, userInfo)
         .then(res => {
             localStorage.setItem('token', res.data.token)
             // console.log(res.data)

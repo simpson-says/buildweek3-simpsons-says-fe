@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { getData } from '../actions/quoteData'
 import { favoriteQuotes, saveFavorites } from '../actions/favorites'
+
 import axiosWithAuth from '../utils/axiosWithAuth'
 import simpsonSaysLogo from '../img/simpsonSaysLogo.png'
 import '../App.css'
@@ -117,7 +118,7 @@ class Search extends Component {
             <p><strong>Season: </strong>{currentQuote.season}</p>
             <p><strong>Episode Number in Season: </strong>{currentQuote.number_in_season}</p>
             
-            { this.props.isClicked ? clickedStar : blankStar }
+            { this.props.savedQuotes.includes(currentQuote.quote_id) ? clickedStar : blankStar }
         </div>
         )
     })
@@ -160,11 +161,12 @@ class Search extends Component {
 }
 
 
-const mapStateToProps = ({ isLoggedIn, error, quotes, isClicked }) => ({
+const mapStateToProps = ({ isLoggedIn, error, quotes, isClicked, savedQuotes }) => ({
     error,
     isLoggedIn,
     quotes,
-    isClicked
+    isClicked,
+    savedQuotes
 })
 
 export default connect(mapStateToProps, { getData, favoriteQuotes, saveFavorites })(Search)

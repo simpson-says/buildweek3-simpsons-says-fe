@@ -33,6 +33,9 @@ import {
     FETCH_RANDOM_QUOTES_FAILURE
 } from '../actions/randomQuote'
 
+
+import { SAVE_FAVORITE_LIST } from '../actions/faveAction'
+
 const initialState = {
     fetchingQuotes: false,
     quotes: [],
@@ -143,6 +146,11 @@ export const reducer = ( state = initialState, action ) => {
             }
         case SAVE_FAVORITE_FAILURE:
             return {}
+        case SAVE_FAVORITE_LIST:
+            return {
+                ...state,
+                savedQuotes: action.payload
+            }
         default: 
             return state;
     }

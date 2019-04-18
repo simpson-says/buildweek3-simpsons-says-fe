@@ -25,7 +25,7 @@ class Favorites extends Component {
       
     return (
       <div style={container}>
-        {this.props.savedQuotes.map(eachQuote => {
+        {/* {this.props.savedQuotes.map(eachQuote => {
             return (<div style={quote}>
                 <p><strong>Character:</strong> {eachQuote.character}</p>
                 <p><strong>Quote:</strong> {eachQuote.quote}</p>
@@ -34,8 +34,8 @@ class Favorites extends Component {
                 <p></p>
                 <p></p>
                 <p></p> */}
-            </div>
-        )})}
+            {/* </div> */}
+        {/* // )})} */} 
       </div>
     )
   }

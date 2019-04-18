@@ -27,17 +27,44 @@ export const favoriteQuotes = ( update ) => dispatch => {
 }
 
 
+// export const saveFavorites = () => dispatch => {
+//     // return { type: SAVE_FAVORITE, payload: favorites }
+//     dispatch({ type: SAVE_FAVORITE })
+//     return axiosWithAuth()
+//         .post(`https://simpson-says-backend.herokuapp.com/users/favorites`, {quoteID: Number(141351)})
+//         .then(res => {
+//             console.log("HELLLOOOOOOOO", res)
+//             dispatch({ type: SAVE_FAVORITE_SUCCESS, payload: res.data })
+//         })
+//         .catch(err => {
+//             dispatch({ type: SAVE_FAVORITE_FAILURE })
+//             console.log(err)
+//         })
+// }
+
 export const saveFavorites = () => dispatch => {
     // return { type: SAVE_FAVORITE, payload: favorites }
-    dispatch({ type: SAVE_FAVORITE })
-    return axiosWithAuth()
-        .post(`https://simpson-says-backend.herokuapp.com/users/favorites`, {quoteID: 141351})
-        .then(res => {
-            console.log("HELLLOOOOOOOO", res)
-            dispatch({ type: SAVE_FAVORITE_SUCCESS, payload: res.data })
-        })
-        .catch(err => {
-            dispatch({ type: SAVE_FAVORITE_FAILURE })
-            console.log(err)
-        })
-}
+    dispatch({ type: SAVE_FAVORITE });
+    const token = localStorage.getItem("token");
+    const headers = {
+      headers: {
+        "content-type": "application/json",
+        Authorization: token
+      }
+    };
+    return axios
+      .post(
+        `https://simpson-says-backend.herokuapp.com/users/favorites`,
+        {
+          quoteID: 50
+        },
+        headers
+      )
+      .then(res => {
+        dispatch({ type: SAVE_FAVORITE_SUCCESS, payload: res.data });
+      })
+      .catch(err => {
+        dispatch({ type: SAVE_FAVORITE_FAILURE });
+        console.log(err);
+      });
+  };

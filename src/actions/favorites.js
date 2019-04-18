@@ -10,7 +10,7 @@ export const SHOW_FAVORITE = 'SHOW_FAVORITE'
 export const LIKED = 'LIKED'
 
 export const favoriteQuotes = ( update ) => dispatch => {
-    console.log(update)
+    // console.log(update)
     dispatch({ type: SELECT_FAVORITE })
     dispatch({ type: LIKED, payload: update })
     // return axios
@@ -32,7 +32,7 @@ export const saveFavorites = () => dispatch => {
     return axios
         .post(`${process.env.REACT_APP_BACKEND_URL}Users/favorites`, {quoteID: 5})
         .then(res => {
-            console.log(res)
+            console.log("HELLLOOOOOOOO", res)
             dispatch({ type: SAVE_FAVORITE_SUCCESS, payload: res.data })
         })
         .catch(err => {

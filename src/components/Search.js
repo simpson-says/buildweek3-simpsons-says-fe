@@ -46,6 +46,9 @@ class Search extends Component {
         e.preventDefault()
         const searchValue = { searchValue: this.state.search }
         this.props.getData(searchValue)
+        // this.setState({
+        //     search: ''
+        // })
     }
 
 
@@ -99,7 +102,7 @@ class Search extends Component {
     let blankStar = <img  src={starEmpty} alt="Not Selected" />
     let clickedStar = <img src={starFull} alt="Selected" />
 
-    
+    console.log('HEEEEEEEEEEEEEEEEEEEEREEEEEEEEEEE FIRST!~!', this.props.quotes)
 
     let characterSearchResultsByQuote = this.props.quotes.filter((eachQuote) => {
         return eachQuote.spoken_words.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1
@@ -119,7 +122,7 @@ class Search extends Component {
         )
     })
 
-    console.log('LOOOOOKKKK!~!', this.props.quotes)
+    console.log('LOOOOOKKKK!~! SECOND', this.props.quotes)
 
     return (
       <div style={container}>

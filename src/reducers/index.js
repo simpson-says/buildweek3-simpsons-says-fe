@@ -43,6 +43,7 @@ const initialState = {
     lastName: '',
     isRegistering: false,
     isLoggedIn: false,
+    likedQuotes: [],
     savedQuotes: [],
     isClicked: false,
     cat: false,
@@ -121,6 +122,7 @@ export const reducer = ( state = initialState, action ) => {
                     return eachQuote
                 }
             })
+            // console.log(state.quotes)
             return {
                 ...state,
                 // isClicked: !state.isClicked,
@@ -129,14 +131,15 @@ export const reducer = ( state = initialState, action ) => {
         case SAVE_FAVORITE:
             return {
                 ...state,
-                savingFavorite: false, 
+                savingFavorite: true, 
                 // savedQuotes: state.quotes.filter(clickedItems => ( clickedItems.liked ))
             }
         case SAVE_FAVORITE_SUCCESS: 
             return {
                 ...state,
-                savedQuotes: state.quotes.filter(clickedItems => ( clickedItems.liked )),
-                savingFavorite: true
+                savedQuotes: action.payload,
+                // state.quotes.filter(clickedItems => ( clickedItems.liked )),
+                savingFavorite: false
             }
         case SAVE_FAVORITE_FAILURE:
             return {}

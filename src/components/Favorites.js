@@ -1,11 +1,46 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import axiosWithAuth from '../utils/axiosWithAuth';
+import axios from 'axios'
+import starEmpty from '../img/starEmpty.svg'
+import starFull from '../img/starFull.svg'
 
 
 class Favorites extends Component {
+    constructor() {
+        super()
+        this.state = {
+            quoteList: []
+        }
+    }
+
+    componentDidMount = () => {
+        this.displayQuotes()
+    }
+
+    displayQuotes = () => {
+        const token = localStorage.getItem("token");
+        const headers = {
+        headers: {
+            "content-type": "application/json",
+            Authorization: token
+        }
+        };
+        return axios
+            .get(`https://simpson-says-backend.herokuapp.com/users/favorites`, headers)
+            .then(res => {
+                this.setState({
+                    quoteList: res.data
+                })
+                console.log(res)
+            })
+            .catch(err => console.log(err))
+    }
 
 
   render() {
+    let blankStar = <img src={starEmpty} alt="Not Selected" />
+    let clickedStar = <img src={starFull} alt="Selected" />
     const container = {
         width: '60%',
         margin: '16px auto',
@@ -25,19 +60,22 @@ class Favorites extends Component {
       
     return (
       <div style={container}>
-        {/* {this.props.savedQuotes.map(eachQuote => {
-            return (<div style={quote}>
-                <p><strong>Character:</strong> {eachQuote.character}</p>
-                <p><strong>Quote:</strong> {eachQuote.quote}</p>
-                {/* <p></p>
-                <p></p>
-                <p></p>
-                <p></p>
-                <p></p> */}
-            {/* </div> */}
-        {/* // )})} */} 
+        {this.state.quoteList.map((currentQuote) => {
+        return (
+        <div key={currentQuote.id} style={quote}>
+            <p><strong>Character: </strong>{currentQuote.raw_character_text}</p>
+            <p><strong>Quote: </strong>{currentQuote.spoken_words}</p>
+            <p><strong>Episode: </strong>{currentQuote.episode_title}</p>
+            <p><strong>Season: </strong>{currentQuote.season}</p>
+            <p><strong>Episode Number in Season: </strong>{currentQuote.number_in_season}</p>
+            <div onClick={() => this.props.saveFavorites(currentQuote.quote_id)}>
+            { this.props.savedQuotes.includes(currentQuote.quote_id) ? clickedStar : blankStar }
+            </div>
+        </div>
+        )
+    })}
       </div>
-    )
+    )    
   }
 }
 

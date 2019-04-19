@@ -120,6 +120,7 @@ class Search extends Component {
           <div className="form-content">
             <p className="searchP">Find your favorite quote!</p>
             <input
+            autocomplete="off"
               name="name"
               type="text"
               placeholder="Search"
@@ -169,9 +170,9 @@ class Search extends Component {
                       this.props.saveFavorites(currentQuote.quote_id)
                     }
                   >
-                    {this.props.savedQuotes.includes(currentQuote.quote_id)
+                    {localStorage.getItem("token")?this.props.savedQuotes.includes(currentQuote.quote_id)
                       ? clickedStar
-                      : blankStar}
+                      : blankStar :null}
                   </div>
                 </div>
               );

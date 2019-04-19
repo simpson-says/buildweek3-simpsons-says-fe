@@ -82,13 +82,14 @@
 /* Register.js */
 .registerContainer {
   /* border: 1px solid #445048; */
-  border-radius: 5px;
-  width: 60%;
-  text-align: center;
-  margin: 35px auto;
-  padding: 50px;
-  box-shadow: 0px 0px 12px 2px  #111;
-  
+  color: #384047;
+  background-color: #e8eeef;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.03) inset;
+  border: none;
+  border-radius: 4px;
+  padding: 1em;
+  margin-bottom: 1.2em;
+  width: 100%;
 
 }
 
@@ -99,14 +100,15 @@
 }
 
 .registerInput {
-  padding: 3px;
-  margin: 5px 0;
-  display: flex;
-  text-align: center;
-  border: 0px;
-  border-radius: 5px;
-  text-align: center;
-  box-shadow: 3px 3px 3px 3px #ccc
+  color: #445048;
+  background: #e8eeef;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.03) inset;
+  border: none;
+  border-radius: 4px;
+  padding: 1em;
+  margin: 1em 1em 1em 0 ;
+  width: 90%;
+  font-size: 24px;
 } 
 
 .registerButton {
@@ -213,27 +215,19 @@ form input:focus {
   outline: none;
 }
 .button {
-  font-weight: 600;
-  text-align: center;
-  font-size: 19px;
-  color: #ffffff;
-  background: #6fd0fe;
-  width: 100%;
-  border: none;
-  border-radius: 4px;
-  padding: 0.8em;
-  margin-top: 1em;
-  margin-bottom: 1em;
-  overflow: hidden;
-  transition: all 200ms ease-in-out;
-  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.3);
+  background: #fed817;
+  padding: 15px 30px;
+  width: 40%;
+  margin: 15px auto;
+  border: 0px;
+  border-radius: 5px;
+  font-size: 30px;
 }
 .button:hover {
-  color: #445048;
-  background: #fed817;
-  cursor: pointer;
-  box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.3);
-  transform: translateY(-4px);
+color:  #fed817;
+background-color: #445048
+
+
 }
 .button span {
   position: relative;
@@ -282,7 +276,10 @@ form input:focus {
 }
 .charName{
   grid-area: charName;
- 
+ display:flex;
+ justify-content: flex-start;
+ align-items: flex-start;
+ flex-direction: column;
 
 }
 .quoteText{
@@ -310,4 +307,23 @@ form input:focus {
   flex-direction: row;
   justify-content:space-around;
   padding: 0 20%
+}
+.form-content{
+  margin-bottom: 2em;
+}
+.bar{
+  display:flex;
+  justify-content: center;
+  align-items: center;
+}
+.genQuote{
+  color: #445048;
+  background: white;
+  box-shadow: 0 10px 6px -6px #777;
+  border: none;
+  border-radius: 4px;
+  padding: 1em;
+  margin-bottom: 1.2em;
+  width: 95%;
+  font-size: 24px;
 }

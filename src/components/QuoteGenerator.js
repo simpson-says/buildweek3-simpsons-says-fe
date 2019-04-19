@@ -49,8 +49,8 @@ class QuoteGenerator extends Component {
 
     return (
       <div className="signupContainer">
-        <form>
-          <div className="form-content">
+        <form className="form-content">
+          <div className="bar">
 
             <select 
               className="registerInput"
@@ -72,7 +72,7 @@ class QuoteGenerator extends Component {
           </form>
 
           {this.state.quotes.map(eachQuote => {
-           return( <div style={quote}>
+           return( <div className="genQuote">
             <p><strong>Character: </strong>{this.state.name}</p>
             <p><strong>Quote: </strong>{eachQuote.quote}</p>
             </div>)

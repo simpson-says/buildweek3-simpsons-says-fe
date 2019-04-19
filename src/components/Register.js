@@ -31,11 +31,11 @@ class Register extends Component {
 
   render() {
     return (
-      <div className="registerContainer">
+      <div className="signupContainer">
+        <form className="form-content">
           <h1>Welcome to Simpsons Says</h1>
-          <h2>Please Register to Continue</h2>
-          <p>If you have already registered, please <Link exact to='/login'>Log In</Link></p>
-        <form className="registerForm">
+          <h2 className="centered">Please Register to Continue</h2>
+          <p className="centered">If you have already registered, please <Link exact to='/login'>Log In</Link></p>
             <input 
                 className='registerInput'
                 type="text"
@@ -52,7 +52,7 @@ class Register extends Component {
                 value={this.state.newCredentials.password}
                 onChange={this.handleChange}
             />
-            <button className='registerButton' onClick={this.register}>Sign Up</button>
+            <button className='button' onClick={this.register}>Sign Up</button>
         </form>
       </div>
     )

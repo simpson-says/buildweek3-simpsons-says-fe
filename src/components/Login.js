@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { login } from '../actions/login'
+import '../App.css'
 
 class Login extends Component {
     state = {
@@ -28,9 +29,11 @@ class Login extends Component {
 
   render() {
     return (
-      <div className="registerContainer">
+      <div className="signupContainer">
+        <form>
+            <div className="form-content">
           <h1>Log In</h1>
-        <form className="registerForm">
+
             <input 
                 className="registerInput"
                 type="text"
@@ -38,7 +41,7 @@ class Login extends Component {
                 placeholder="Username"
                 value={this.state.credentials.username}
                 onChange={this.handleChange}
-            />
+                />
             <input 
                 className="registerInput"
                 type="password"
@@ -46,8 +49,9 @@ class Login extends Component {
                 placeholder="Password"
                 value={this.state.credentials.password}
                 onChange={this.handleChange}
-            />
-            <button className="registerButton" onClick={this.login}>Log In</button>
+                />
+                </div>
+            <button className="button" onClick={this.login}>Log In</button>
         </form>
       </div>
     )

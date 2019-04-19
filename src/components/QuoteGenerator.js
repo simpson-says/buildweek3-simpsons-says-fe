@@ -32,10 +32,21 @@ class QuoteGenerator extends Component {
   }
 
   render() {
+    const quote = {
+      width: '60%',
+      border: '1px solid black',
+      borderRadius: '5px',
+      boxShadow: '5px 5px 5px #abcdf1',
+      textAlign: 'center',
+      margin: '16px auto'
+  }
     return (
-      <div>
+      <div className="signupContainer">
         <form>
+          <div className="form-content">
+
             <select 
+              className="registerInput"
               name="name"
               value={this.state.name}
               onChange={this.handleChange}>
@@ -48,11 +59,13 @@ class QuoteGenerator extends Component {
               <option value="skinner">Skinner</option>
 
               </select>
-              <button onClick={this.quoteRetrieval} >Generate Quote</button>
+              
+              <button className="button" onClick={this.quoteRetrieval} >Generate Quote</button>
+              </div>
           </form>
 
           {this.state.quotes.map(eachQuote => {
-           return( <div>
+           return( <div style={quote}>
             <p><strong>Character: </strong>{this.state.name}</p>
             <p><strong>Quote: </strong>{eachQuote.quote}</p>
             </div>)

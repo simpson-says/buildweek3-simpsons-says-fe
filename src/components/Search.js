@@ -79,7 +79,9 @@ class Search extends Component {
     const input = {
         textAlign: 'center',
         boxShadow: '5px 5px 5px #abcdf1',
-        borderRadius: '5px'
+        borderRadius: '5px',
+        alignItems: 'center',
+        paddingRight: '5px'
     }
 
     const title = {
@@ -114,10 +116,13 @@ class Search extends Component {
     console.log('LOOOOOKKKK!~! SECOND', this.props.quotes)
     console.log(this.props.savedQuotes)
     return (
-      <div style={container}>
+        <div>
         <img className="searchLogo" src={simpsonSaysLogo} alt="logo" />
-          <p style={title}>Enter a Keyword to Search</p>
+      <div className='signupContainer'>
           <form onSubmit={this.submitSearch}>
+          <div className="form-content">
+
+          <p className="searchP">Enter a Keyword to Search</p>
             <input 
                 style={input}
                 name="name"
@@ -125,14 +130,15 @@ class Search extends Component {
                 placeholder="Search for a Quote"
                 value={this.state.search}
                 onChange={this.search}
-            />
+                />
+                </div>
+        <p className="searchP">Select your Favorite Quotes Below</p>
             </form>
-        <p style={p}>Select your Favorite Quotes Below</p>
-        <button onClick={this.saveSelectedFaves} className="registerButton">Save Your Chosen Favorites</button>
-        
+        {/* <button onClick={this.saveSelectedFaves} className="registerButton">Save Your Chosen Favorites</button> */}
+        <br/>
     {this.state.search.length >= 3 ? characterSearchResultsByQuote.map((currentQuote) => {
         return (
-        <div key={currentQuote.id} style={quote}>
+            <div key={currentQuote.id} style={quote}>
             <p><strong>Character: </strong>{currentQuote.raw_character_text}</p>
             <p><strong>Quote: </strong>{currentQuote.spoken_words}</p>
             <p><strong>Episode: </strong>{currentQuote.episode_title}</p>
@@ -146,6 +152,7 @@ class Search extends Component {
     }) : null}
         
       </div>
+    </div>
     )
   }
 }

@@ -117,8 +117,6 @@ class Search extends Component {
     console.log('LOOOOOKKKK!~! SECOND', this.props.quotes)
     console.log(this.props.savedQuotes)
     return (
-        <>
-            {this.props.fetchingQuotes ?  	<Loader type="Ball-Triangle" color="#somecolor" height={80} width={80} /> :
         <div>
         <img className="searchLogo" src={simpsonSaysLogo} alt="logo" />
       <div className='signupContainer'>
@@ -139,6 +137,8 @@ class Search extends Component {
             </form>
         {/* <button onClick={this.saveSelectedFaves} className="registerButton">Save Your Chosen Favorites</button> */}
         <br/>
+                {this.props.fetchingQuotes ?  	<Loader type="Puff" color="#fed817" height={160} width={160} /> :
+                <>
     {this.state.search.length >= 3 ? characterSearchResultsByQuote.map((currentQuote) => {
         return (
             <div key={currentQuote.id} style={quote}>
@@ -154,11 +154,13 @@ class Search extends Component {
         )
     }) : null}
         
+        </>
+    }
       </div>
       
-    </div>
-      }
-      </>
+      </div>
+      
+      
     )
   }
 }

@@ -40,6 +40,13 @@ class QuoteGenerator extends Component {
       textAlign: 'center',
       margin: '16px auto'
   }
+
+  let capitalize = (s) => {
+    if ( typeof s !== 'string') return ''
+    return s.charAt(0).toUpperCase + s.slice(1)
+  }
+  
+
     return (
       <div className="signupContainer">
         <form>

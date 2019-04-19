@@ -16,11 +16,10 @@ export const getData = searchValue => dispatch => {
   dispatch({ type: FETCH_QUOTES_START });
   axios
     .get(
-      `https://simpson-says.herokuapp.com/api/search`,
+      `https://simpson-says.herokuapp.com/api/search?search=${searchValue.searchValue}`,
       {headers:{
         "content-type": "application/json",
-        'Authorization': token},
-      data:{search:searchValue}}
+        'Authorization': token},}
     )
     .then(res => {
       console.log(res.data);

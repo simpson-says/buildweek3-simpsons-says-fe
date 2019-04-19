@@ -257,3 +257,57 @@ form input:focus {
   text-align: center;
   font-size: 30px;
 }
+.quoteBox{
+  color: #445048;
+  background: white;
+  box-shadow: 0 10px 6px -6px #777;
+  border: none;
+  border-radius: 4px;
+  padding: 1em;
+  margin-bottom: 1.2em;
+  width: 95%;
+  font-size: 24px;
+  display:grid;
+  grid-template-columns: 25% 25% 25% 25%;
+  grid-template-rows: auto;
+  grid-template-areas: 
+    "charName . infoSection infoSection"
+    "quoteText quoteText quoteText favoriteButton";
+}
+.infoSection{
+  grid-area: infoSection;
+  
+
+
+}
+.charName{
+  grid-area: charName;
+ 
+
+}
+.quoteText{
+  grid-area:quoteText;
+  justify-self: start;
+  font-size: 30px;
+  width: 100%;
+  display:flex;
+  align-items: flex-start;
+  flex-direction: column;
+}
+.favoriteButton{
+  grid-area:favoriteButton;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+}
+.star{
+  width: 100px;
+  height: 100px;
+ 
+}
+.lowerText{
+  display:flex;
+  flex-direction: row;
+  justify-content:space-around;
+  padding: 0 20%
+}

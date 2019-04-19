@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { getData, deleteData } from "../actions/quoteData";
 import { favoriteQuotes, saveFavorites } from "../actions/favorites";
 import Loader from "react-loader-spinner";
-import {dispatch} from "redux";
+import { dispatch } from "redux";
 import axiosWithAuth from "../utils/axiosWithAuth";
 import simpsonSaysLogo from "../img/simpsonSaysLogo.png";
 import "../App.css";
@@ -37,8 +37,8 @@ class Search extends Component {
     //     this.props.getData()
     // }, 1000)
     console.log(e.target.value);
-    if(e.target.value===""){
-        this.props.deleteData()
+    if (e.target.value === "") {
+      this.props.deleteData();
     }
     this.setState({
       search: e.target.value
@@ -82,20 +82,20 @@ class Search extends Component {
       textDecoration: "underline"
     };
 
-    const quote = {
-      width: "60%",
-      border: "1px solid black",
-      borderRadius: "5px",
-      boxShadow: "5px 5px 5px #abcdf1",
-      textAlign: "center",
-      margin: "16px auto"
-    };
+    // const quote = {
+    //   width: "60%",
+    //   border: "1px solid black",
+    //   borderRadius: "5px",
+    //   boxShadow: "5px 5px 5px #abcdf1",
+    //   textAlign: "center",
+    //   margin: "16px auto"
+    // };
 
     const p = {
       textAlign: "center"
     };
 
-    let blankStar = <img src={starEmpty} alt="Not Selected" />;
+    let blankStar = <img className="star" src={starEmpty} alt="Not Selected" />;
     let clickedStar = <img src={starFull} alt="Selected" />;
 
     console.log(
@@ -103,13 +103,14 @@ class Search extends Component {
       this.props.quotes
     );
 
-    let characterSearchResultsByQuote = this.props.quotes.filter(eachQuote => {
-      return (
-        eachQuote.spoken_words
-          .toLowerCase()
-          .indexOf(this.state.search.toLowerCase()) !== -1
-      );
-    });
+    // let characterSearchResultsByQuote =   this.props.quotes
+    // // .filter(eachQuote => {
+    // //   return (
+    // //     eachQuote.spoken_words
+    // //       .toLowerCase()
+    // //       .indexOf(this.state.search.toLowerCase()) !== -1
+    // //   );
+    // });
 
     console.log("LOOOOOKKKK!~! SECOND", this.props.quotes);
     console.log(this.props.savedQuotes);
@@ -133,43 +134,48 @@ class Search extends Component {
           <Loader type="Puff" color="#fed817" height={160} width={160} />
         ) : (
           <>
-            {characterSearchResultsByQuote.length > 0
-              ? characterSearchResultsByQuote.map(currentQuote => {
-                  return (
-                    <div key={currentQuote.id} style={quote}>
-                      <p>
-                        <strong>Character: </strong>
-                        {currentQuote.raw_character_text}
-                      </p>
-                      <p>
-                        <strong>Quote: </strong>
-                        {currentQuote.spoken_words}
-                      </p>
-                      <p>
-                        <strong>Episode: </strong>
-                        {currentQuote.episode_title}
-                      </p>
+            {this.props.quotes.map(currentQuote => {
+              return (
+                <div key={currentQuote.id} className="quoteBox">
+                  <p className="charName">
+                    <strong>Character: </strong><br/>
+                    {currentQuote.raw_character_text}
+                  </p>
+                  <div className="infoSection">
+                    
+                      <strong>Episode: </strong>
+                      {currentQuote.episode_title}
+                    
+                    <div className="lowerText">
                       <p>
                         <strong>Season: </strong>
                         {currentQuote.season}
                       </p>
                       <p>
-                        <strong>Episode Number in Season: </strong>
+                        <strong>Episode: </strong>
                         {currentQuote.number_in_season}
                       </p>
-                      <div
-                        onClick={() =>
-                          this.props.saveFavorites(currentQuote.quote_id)
-                        }
-                      >
-                        {this.props.savedQuotes.includes(currentQuote.quote_id)
-                          ? clickedStar
-                          : blankStar}
-                      </div>
                     </div>
-                  );
-                })
-              : null}
+                  </div>
+
+                  <p className="quoteText">
+                    <strong>Quote: </strong><br/>
+                    <div>{currentQuote.spoken_words}</div>
+                  </p>
+
+                  <div
+                    className="favoriteButton"
+                    onClick={() =>
+                      this.props.saveFavorites(currentQuote.quote_id)
+                    }
+                  >
+                    {this.props.savedQuotes.includes(currentQuote.quote_id)
+                      ? clickedStar
+                      : blankStar}
+                  </div>
+                </div>
+              );
+            })}
           </>
         )}
       </div>

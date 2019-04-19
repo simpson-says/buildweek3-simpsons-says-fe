@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import "./App.css";
 import QuoteGenerator from "./components/QuoteGenerator";
+import Clouds from "./components/Clouds"
 import Search from "./components/Search";
 import Favorites from "./components/Favorites";
 import Register from "./components/Register";
@@ -12,6 +13,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+      <Clouds />
         <Router>
           <div className="navbar">
             <img className="navimg" src={logo2} alt="logo" />

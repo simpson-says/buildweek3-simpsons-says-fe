@@ -21,7 +21,7 @@ class App extends Component {
             </div>
 
             <div className="third">
-              <Link className="link" to="/search">
+              <Link className="link" to="/">
                 Search for a Quote
               </Link>
 
@@ -45,7 +45,7 @@ class App extends Component {
           <Route path="/login" component={Login} />
           <Route path="/favorites" component={Favorites} />{" "}
           {/* this is going to have addFavorite as part of it with a confirmation screen - get request for faves, put or post for add */}
-          <Route path="/search" component={Search} />
+          <Route exact path="/" component={Search} />
           <Route path="/generator" component={QuoteGenerator} />
         </Router>
       </div>

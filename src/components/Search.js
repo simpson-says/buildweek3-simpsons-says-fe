@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { getData } from "../actions/quoteData";
+import { getData, deleteData } from "../actions/quoteData";
 import { favoriteQuotes, saveFavorites } from "../actions/favorites";
 import Loader from "react-loader-spinner";
-
+import {dispatch} from "redux";
 import axiosWithAuth from "../utils/axiosWithAuth";
 import simpsonSaysLogo from "../img/simpsonSaysLogo.png";
 import "../App.css";
@@ -36,6 +36,10 @@ class Search extends Component {
     //     // console.log('test')
     //     this.props.getData()
     // }, 1000)
+    console.log(e.target.value);
+    if(e.target.value===""){
+        this.props.deleteData()
+    }
     this.setState({
       search: e.target.value
       // throttleTimer: newTimer
@@ -71,14 +75,6 @@ class Search extends Component {
       display: "flex",
       justifyContent: "center",
       flexDirection: "column"
-    };
-
-    const input = {
-      textAlign: "center",
-      boxShadow: "5px 5px 5px #abcdf1",
-      borderRadius: "5px",
-      alignItems: "center",
-      paddingRight: "5px"
     };
 
     const title = {
@@ -118,71 +114,64 @@ class Search extends Component {
     console.log("LOOOOOKKKK!~! SECOND", this.props.quotes);
     console.log(this.props.savedQuotes);
     return (
-      <div>
-        <img className="searchLogo" src={simpsonSaysLogo} alt="logo" />
-        <div className="signupContainer">
-          <form onSubmit={this.submitSearch}>
-            <div className="form-content">
-              <p className="searchP">Enter a Keyword to Search</p>
-              <input
-                style={input}
-                name="name"
-                type="text"
-                placeholder="Search for a Quote"
-                value={this.state.search}
-                onChange={this.search}
-              />
-            </div>
-            <p className="searchP">Select your Favorite Quotes Below</p>
-          </form>
-          {/* <button onClick={this.saveSelectedFaves} className="registerButton">Save Your Chosen Favorites</button> */}
-          <br />
-          {this.props.fetchingQuotes ? (
-            <Loader type="Puff" color="#fed817" height={160} width={160} />
-          ) : (
-            <>
-              {this.state.search.length >= 3
-                ? characterSearchResultsByQuote.map(currentQuote => {
-                    return (
-                      <div key={currentQuote.id} style={quote}>
-                        <p>
-                          <strong>Character: </strong>
-                          {currentQuote.raw_character_text}
-                        </p>
-                        <p>
-                          <strong>Quote: </strong>
-                          {currentQuote.spoken_words}
-                        </p>
-                        <p>
-                          <strong>Episode: </strong>
-                          {currentQuote.episode_title}
-                        </p>
-                        <p>
-                          <strong>Season: </strong>
-                          {currentQuote.season}
-                        </p>
-                        <p>
-                          <strong>Episode Number in Season: </strong>
-                          {currentQuote.number_in_season}
-                        </p>
-                        <div
-                          onClick={() =>
-                            this.props.saveFavorites(currentQuote.quote_id)
-                          }
-                        >
-                          {this.props.savedQuotes.includes(
-                            currentQuote.quote_id
-                          )
-                            ? clickedStar
-                            : blankStar}
-                        </div>
+      <div className="signupContainer">
+        <form onSubmit={this.submitSearch}>
+          <div className="form-content">
+            <p className="searchP">Find your favorite quote!</p>
+            <input
+              name="name"
+              type="text"
+              placeholder="Search"
+              value={this.state.search}
+              onChange={this.search}
+            />
+          </div>
+        </form>
+        {/* <button onClick={this.saveSelectedFaves} className="registerButton">Save Your Chosen Favorites</button> */}
+        <br />
+        {this.props.fetchingQuotes ? (
+          <Loader type="Puff" color="#fed817" height={160} width={160} />
+        ) : (
+          <>
+            {characterSearchResultsByQuote.length > 0
+              ? characterSearchResultsByQuote.map(currentQuote => {
+                  return (
+                    <div key={currentQuote.id} style={quote}>
+                      <p>
+                        <strong>Character: </strong>
+                        {currentQuote.raw_character_text}
+                      </p>
+                      <p>
+                        <strong>Quote: </strong>
+                        {currentQuote.spoken_words}
+                      </p>
+                      <p>
+                        <strong>Episode: </strong>
+                        {currentQuote.episode_title}
+                      </p>
+                      <p>
+                        <strong>Season: </strong>
+                        {currentQuote.season}
+                      </p>
+                      <p>
+                        <strong>Episode Number in Season: </strong>
+                        {currentQuote.number_in_season}
+                      </p>
+                      <div
+                        onClick={() =>
+                          this.props.saveFavorites(currentQuote.quote_id)
+                        }
+                      >
+                        {this.props.savedQuotes.includes(currentQuote.quote_id)
+                          ? clickedStar
+                          : blankStar}
                       </div>
-                    );
-                  })
-                : null}
-            </>
-          )}
-        </div>
+                    </div>
+                  );
+                })
+              : null}
+          </>
+        )}
       </div>
     );
   }
@@ -206,5 +195,5 @@ const mapStateToProps = ({
 
 export default connect(
   mapStateToProps,
-  { getData, favoriteQuotes, saveFavorites }
+  { getData, favoriteQuotes, saveFavorites, deleteData }
 )(Search);

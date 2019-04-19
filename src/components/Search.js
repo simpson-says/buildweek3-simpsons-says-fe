@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { getData } from '../actions/quoteData'
 import { favoriteQuotes, saveFavorites } from '../actions/favorites'
+import Loader from 'react-loader-spinner'
 
 import axiosWithAuth from '../utils/axiosWithAuth'
 import simpsonSaysLogo from '../img/simpsonSaysLogo.png'
@@ -116,6 +117,8 @@ class Search extends Component {
     console.log('LOOOOOKKKK!~! SECOND', this.props.quotes)
     console.log(this.props.savedQuotes)
     return (
+        <>
+            {this.props.fetchingQuotes ?  	<Loader type="Ball-Triangle" color="#somecolor" height={80} width={80} /> :
         <div>
         <img className="searchLogo" src={simpsonSaysLogo} alt="logo" />
       <div className='signupContainer'>
@@ -152,18 +155,22 @@ class Search extends Component {
     }) : null}
         
       </div>
+      
     </div>
+      }
+      </>
     )
   }
 }
 
 
-const mapStateToProps = ({ isLoggedIn, error, quotes, isClicked, savedQuotes }) => ({
+const mapStateToProps = ({ isLoggedIn, error, quotes, isClicked, savedQuotes, fetchingQuotes }) => ({
     error,
     isLoggedIn,
     quotes,
     isClicked,
-    savedQuotes
+    savedQuotes,
+    fetchingQuotes
 })
 
 export default connect(mapStateToProps, { getData, favoriteQuotes, saveFavorites })(Search)

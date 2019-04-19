@@ -41,42 +41,38 @@
 
 /* NavBar */
 .navbar {
-  width: 100%;
   display: flex;
   justify-content: space-between;
   text-align: center;
   align-items: center;
-  border-bottom: 2px solid #fed817;
-  height: 65px;
-  /* background-color: #abdcf1 */
+  border-bottom: 3px solid #fed817;
+  height: 4em;
+  text-decoration: none;
+  padding: 0 1em;
+  background-color: white;
   /* flex-direction: row; */
 }
 
 .navimg {
-  width: 10%;
-}
-
-.navlinks {
-  text-decoration: none;
+  max-width: 200px;
 }
 
 .link {
   text-decoration: none;
   width: 5%;
-  padding: 0 0 10px;
-  border: 1px solid #d0b070;
   margin: 0 0 0 5px;
   border-radius: 4px;
-  padding: 10px 15px;
-  color: #111;
+  padding: 10px 10px;
+  color: #445048;
+  background-color:#fed817;
   /* #445048 */
   /* #445048; */
 }
 
 .link:hover {
-  background: #6fd0fe;
+  background: #445048;
+  color: #fed817;
 }
-
 
 /* Register.js */
 .registerContainer {

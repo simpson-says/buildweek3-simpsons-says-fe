@@ -120,7 +120,7 @@ class Search extends Component {
           <div className="form-content">
             <p className="searchP">Find your favorite quote!</p>
             <input
-            autocomplete="off"
+            autoComplete="off"
               name="name"
               type="text"
               placeholder="Search"

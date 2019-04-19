@@ -10,9 +10,17 @@ import Login from "./components/Login";
 import simpsonSaysLogo from "./img/simpsonSaysLogo.png";
 
 class App extends Component {
+  parseJwt =(token)=> {
+    var base64Url = token.split('.')[1];
+    var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+    console.log(JSON.parse(window.atob(base64)));
+    return ;
+};
+
   render() {
     return (
       <div className="App">
+     
         <Clouds />
         <Router>
           <div className="navbar">
@@ -33,12 +41,13 @@ class App extends Component {
               </Link>
             </div>
             <div className="third">
-              <Link className="link" to="/register">
+            {localStorage.getItem("token") ?<div>User: {this.parseJwt(localStorage.getItem("token"))}</div>: ( <><Link className="link" to="/register">
                 Register
               </Link>
               <Link className="link" to="/login">
                 Log In
-              </Link>
+              </Link></>)}
+             
             </div>
           </div>
           <Route exact path="/register" component={Register} />

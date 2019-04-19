@@ -4,7 +4,7 @@ import axiosWithAuth from '../utils/axiosWithAuth';
 import axios from 'axios'
 import starEmpty from '../img/starEmpty.svg'
 import starFull from '../img/starFull.svg'
-
+import { favoriteQuotes, saveFavorites } from "../actions/favorites";
 
 class Favorites extends Component {
     constructor() {
@@ -39,8 +39,8 @@ class Favorites extends Component {
 
 
   render() {
-    let blankStar = <img src={starEmpty} alt="Not Selected" />
-    let clickedStar = <img src={starFull} alt="Selected" />
+    let blankStar = <img className="star" src={starEmpty} alt="Not Selected" />;
+    let clickedStar = <img className="star" src={starFull} alt="Selected" />;
     const container = {
         width: '60%',
         margin: '16px auto',
@@ -60,18 +60,47 @@ class Favorites extends Component {
       
     return (
       <div style={container}>
+      {localStorage.getItem("token") ? null: (<div className="genQuote">Please Login to see favorites</div>)}
         {this.state.quoteList.map((currentQuote) => {
         return (
-        <div key={currentQuote.id} style={quote}>
-            <p><strong>Character: </strong>{currentQuote.raw_character_text}</p>
-            <p><strong>Quote: </strong>{currentQuote.spoken_words}</p>
-            <p><strong>Episode: </strong>{currentQuote.episode_title}</p>
-            <p><strong>Season: </strong>{currentQuote.season}</p>
-            <p><strong>Episode Number in Season: </strong>{currentQuote.number_in_season}</p>
-            <div onClick={() => this.props.saveFavorites(currentQuote.quote_id)}>
-            { this.props.savedQuotes.includes(currentQuote.quote_id) ? clickedStar : blankStar }
+            <div key={currentQuote.id} className="quoteBox">
+            <p className="charName">
+              <strong>Character: </strong><br/>
+              {currentQuote.raw_character_text}
+            </p>
+            <div className="infoSection">
+              
+                <strong>Episode: </strong>
+                {currentQuote.episode_title}
+              
+              <div className="lowerText">
+                <p>
+                  <strong>Season: </strong>
+                  {currentQuote.season}
+                </p>
+                <p>
+                  <strong>Episode: </strong>
+                  {currentQuote.number_in_season}
+                </p>
+              </div>
             </div>
-        </div>
+
+            <p className="quoteText">
+              <strong>Quote: </strong><br/>
+              <div>{currentQuote.spoken_words}</div>
+            </p>
+
+            <div
+              className="favoriteButton"
+              onClick={() =>
+                this.props.saveFavorites(currentQuote.quote_id)
+              }
+            >
+              {localStorage.getItem("token")?this.props.savedQuotes.includes(currentQuote.quote_id)
+                ? clickedStar
+                : blankStar :null}
+            </div>
+          </div>
         )
     })}
       </div>
@@ -84,4 +113,4 @@ const mapStateToProps = ({ savedQuotes }) => ({
 })
 
 
-export default connect(mapStateToProps, {})(Favorites)
+export default connect(mapStateToProps, {saveFavorites})(Favorites)

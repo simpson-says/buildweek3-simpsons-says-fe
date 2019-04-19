@@ -8,11 +8,19 @@ export const FETCH_QUOTES_FAILURE = "FETCH_QUOTES_FAILURE";
 
 export const getData = searchValue => dispatch => {
   console.log(searchValue);
+  const token = localStorage.getItem("token");
+//   const headers = {
+//     headers: ,
+//   };
+//   console.log(headers);
   dispatch({ type: FETCH_QUOTES_START });
   axios
-    .post(
-      `https://simpson-says-backend.herokuapp.com/users/search`,
-      searchValue
+    .get(
+      `https://simpson-says.herokuapp.com/api/search`,
+      {headers:{
+        "content-type": "application/json",
+        'Authorization': token},
+      data:{search:searchValue}}
     )
     .then(res => {
       console.log(res.data);

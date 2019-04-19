@@ -51,7 +51,8 @@ class QuoteGenerator extends Component {
       <div className="signupContainer">
         <form className="form-content">
           <div className="bar">
-
+          Not Implented on this Backend
+{/* 
             <select 
               className="registerInput"
               name="name"
@@ -67,8 +68,8 @@ class QuoteGenerator extends Component {
 
               </select>
               
-              <button className="button" onClick={this.quoteRetrieval} >Generate Quote</button>
-              </div>
+              <button className="button" onClick={this.quoteRetrieval} >Generate Quote</button>*/}
+              </div> 
           </form>
 
           {this.state.quotes.map(eachQuote => {

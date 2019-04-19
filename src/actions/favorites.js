@@ -49,7 +49,7 @@ export const saveFavorites = (quote) => dispatch => {
     // return { type: SAVE_FAVORITE, payload: favorites }
     // dispatch({ type: SAVE_FAVORITE });
     // console.log("object")
-    let newStore = [ ... store.getState().savedQuotes ]
+    // let newStore = [ ...store.getState().savedQuotes ]
     // console.log(newStore)
     const token = localStorage.getItem("token");
     const headers = {
@@ -60,7 +60,7 @@ export const saveFavorites = (quote) => dispatch => {
     };
     return axios
       .post(
-        `https://simpson-says-backend.herokuapp.com/users/favorites`,
+        `https://simpson-says.herokuapp.com/api/favorites/${quote}`,
         {
           quoteID: quote
         },
@@ -69,14 +69,14 @@ export const saveFavorites = (quote) => dispatch => {
       .then(res => {
           console.log(res)
           
-          if ( newStore.includes(quote) ) {
-            console.log(newStore.indexOf(quote))
-            newStore.splice(newStore.indexOf(quote), 1)
-          } else {
-            newStore.push(quote)
-          }
-          console.log(newStore)
-        dispatch({ type: SAVE_FAVORITE_LIST, payload: newStore})
+          // if ( newStore.includes(quote) ) {
+          //   console.log(newStore.indexOf(quote))
+          //   newStore.splice(newStore.indexOf(quote), 1)
+          // } else {
+          //   newStore.push(quote)
+          // }
+          // console.log(newStore)
+        // dispatch({ type: SAVE_FAVORITE_LIST, payload: newStore})
         dispatch({ type: SAVE_FAVORITE_SUCCESS, payload: res.data });
       })
       .catch(err => {

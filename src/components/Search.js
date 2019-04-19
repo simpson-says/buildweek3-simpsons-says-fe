@@ -170,9 +170,8 @@ class Search extends Component {
                       this.props.saveFavorites(currentQuote.quote_id)
                     }
                   >
-                    {localStorage.getItem("token")?this.props.savedQuotes.includes(currentQuote.quote_id)
-                      ? clickedStar
-                      : blankStar :null}
+                    {clickedStar
+                      }
                   </div>
                 </div>
               );

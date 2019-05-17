@@ -10,7 +10,8 @@ class Favorites extends Component {
     constructor() {
         super()
         this.state = {
-            quoteList: []
+            quoteList: [],
+            fetching: false
         }
     }
 
@@ -26,15 +27,24 @@ class Favorites extends Component {
             Authorization: token
         }
         };
+        this.setState({
+          fetching: !this.state.fetching
+        })
         return axios
             .get(`https://simpson-says-backend.herokuapp.com/users/favorites`, headers)
             .then(res => {
                 this.setState({
-                    quoteList: res.data
+                    quoteList: res.data,
+                    fetching: !this.state.fetching
                 })
                 console.log(res)
             })
-            .catch(err => console.log(err))
+            .catch(err => {
+              console.log(err)
+              this.setState({
+                fetching: !this.state.fetching
+              })
+            })
     }
 
 
@@ -57,7 +67,7 @@ class Favorites extends Component {
         textAlign: 'center',
         margin: '16px auto'
     }
-      
+      console.log(this.props.savedQuotes)
     return (
       <div style={container}>
       {localStorage.getItem("token") ? null: (<div className="genQuote">Please Login to see favorites</div>)}

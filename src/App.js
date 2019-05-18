@@ -8,6 +8,7 @@ import Favorites from "./components/Favorites";
 import Register from "./components/Register";
 import Login from "./components/Login";
 import LoginDetails from './components/LoginDetails'
+import RegisterDetails from './components/RegisterDetails'
 import simpsonSaysLogo from "./img/simpsonSaysLogo.png";
 
 class App extends Component {
@@ -64,6 +65,7 @@ class App extends Component {
           <Route exact path="/" component={Search} />
           <Route path="/generator" component={QuoteGenerator} />
           <Route path='/loginstatus' component={LoginDetails} />
+          <Route path='/registerstatus' component={RegisterDetails} />
         </Router>
       </div>
     );

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 
 
-export default class LoginDetails extends Component {
+export default class RegisterSuccess extends Component {
 
     gotoSearch = e => {
         e.preventDefault()
@@ -19,9 +19,9 @@ export default class LoginDetails extends Component {
         this.props.history.push('/login')
     }
 
-    login = e => {
+    register = e => {
         e.preventDefault();
-        this.props.history.push('/login')
+        this.props.history.push('/register')
     }
 
 
@@ -31,15 +31,15 @@ export default class LoginDetails extends Component {
             <div className="loginStatus">
                 {localStorage.getItem('token')  ? 
                 <div className="form-content" >
-                    <h1>Login Success!</h1>
+                    <h1>Registration Success!</h1>
                     <h3>Click <span className="linkForLogin" onClick={this.gotoSearch}>here</span> to search</h3>
                     <h3>Click <span className="linkForLogin" onClick={this.gotoFavorites}>here</span> to view your favorites</h3>
                     <h3>Click <span className="linkForLogin" onClick={this.logout}>here</span> to logout</h3>
                 </div>
                 : 
                 <div>
-                    <h1>Login failure</h1>
-                    <h3>Click <span className="linkForLogin" onClick={this.login} >here</span> to try again</h3> 
+                    <h1>Registration failure</h1>
+                    <h3>The username you chose is already in use.  Click <span className="linkForLogin" onClick={this.register} >here</span> to try again</h3> 
                 </div>}
             </div>
   )

@@ -25,7 +25,7 @@ class Register extends Component {
     register = e => {
         e.preventDefault();
         this.props.register(this.state.newCredentials).then(() => {
-            this.props.history.push('/favorites')
+            this.props.history.push('/registerstatus')
         })
     }
 

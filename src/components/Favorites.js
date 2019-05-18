@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import axiosWithAuth from '../utils/axiosWithAuth';
 import axios from 'axios'
 import starEmpty from '../img/starEmpty.svg'
 import starFull from '../img/starFull.svg'
-import { favoriteQuotes, saveFavorites } from "../actions/favorites";
+import { saveFavorites } from "../actions/favorites";
+import Loader from "react-loader-spinner";
 
 class Favorites extends Component {
     constructor() {
@@ -15,9 +15,9 @@ class Favorites extends Component {
         }
     }
 
-    componentDidMount = () => {
-        this.displayQuotes()
-    }
+    componentWillMount = () => {
+      this.displayQuotes()
+  }
 
     displayQuotes = () => {
         const token = localStorage.getItem("token");
@@ -33,11 +33,11 @@ class Favorites extends Component {
         return axios
             .get(`https://simpson-says-backend.herokuapp.com/users/favorites`, headers)
             .then(res => {
+              
                 this.setState({
                     quoteList: res.data,
                     fetching: !this.state.fetching
                 })
-                console.log(res)
             })
             .catch(err => {
               console.log(err)
@@ -47,8 +47,11 @@ class Favorites extends Component {
             })
     }
 
+    
+
 
   render() {
+    // console.log(this.state.quoteList)
     let blankStar = <img className="star" src={starEmpty} alt="Not Selected" />;
     let clickedStar = <img className="star" src={starFull} alt="Selected" />;
     const container = {
@@ -67,52 +70,64 @@ class Favorites extends Component {
         textAlign: 'center',
         margin: '16px auto'
     }
-      console.log(this.props.savedQuotes)
+      
+    const displayTest = () => {
+      if (localStorage.getItem("token") && this.state.quoteList.length === 0 && this.state.fetching === false) {
+        return <div className="genQuote">There are no favorites to display</div>
+      } else if (localStorage.getItem("token")) {
+        return null
+      } else{ 
+        return <div className="genQuote">Please Login to see favorites</div>
+      }
+    }
+      
+
     return (
       <div style={container}>
-      {localStorage.getItem("token") ? null: (<div className="genQuote">Please Login to see favorites</div>)}
+      {displayTest()}
+      <>
+      {/* {this.state.fetching ?  <Loader type="Puff" color="#fed817" height={160} width={160} /> :
+    } */}
+
         {this.state.quoteList.map((currentQuote) => {
-        return (
+          return (
             <div key={currentQuote.id} className="quoteBox">
             <p className="charName">
               <strong>Character: </strong><br/>
               {currentQuote.raw_character_text}
             </p>
             <div className="infoSection">
-              
-                <strong>Episode: </strong>
-                {currentQuote.episode_title}
-              
-              <div className="lowerText">
-                <p>
-                  <strong>Season: </strong>
-                  {currentQuote.season}
-                </p>
-                <p>
-                  <strong>Episode: </strong>
-                  {currentQuote.number_in_season}
-                </p>
-              </div>
+              <strong>Episode: </strong>
+              {currentQuote.episode_title}
+            <div className="lowerText">
+            <p>
+              <strong>Season: </strong>
+              {currentQuote.season}
+            </p>
+            <p>
+              <strong>Episode: </strong>
+              {currentQuote.number_in_season}
+            </p>
             </div>
-
+            </div>
             <p className="quoteText">
               <strong>Quote: </strong><br/>
               <div>{currentQuote.spoken_words}</div>
             </p>
-
             <div
-              className="favoriteButton"
-              onClick={() =>
-                this.props.saveFavorites(currentQuote.quote_id)
-              }
+            className="favoriteButton"
+            onClick={() =>
+              this.props.saveFavorites(currentQuote.quote_id)
+            }
             >
-              {localStorage.getItem("token")?this.props.savedQuotes.includes(currentQuote.quote_id)
-                ? clickedStar
-                : blankStar :null}
+            {localStorage.getItem("token")?this.props.savedQuotes.includes(currentQuote.quote_id)
+            ? clickedStar
+            : blankStar :null}
             </div>
-          </div>
-        )
-    })}
+            </div>
+            )
+          })}
+        </>
       </div>
     )    
   }

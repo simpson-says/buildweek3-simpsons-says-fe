@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { login } from '../actions/login'
 import '../App.css'
+import LoginSuccess from './LoginSuccess'
 
 class Login extends Component {
     state = {
@@ -23,7 +24,7 @@ class Login extends Component {
     login = e => {
         e.preventDefault();
         this.props.login(this.state.credentials).then(() => {
-            this.props.history.push('/')
+            {localStorage.getItem('token') ? this.props.history.push('/') : alert('Login Failed!  Please try again.')}
         })
     }
 
@@ -53,6 +54,7 @@ class Login extends Component {
                 </div>
             <button className="button" onClick={this.login}>Log In</button>
         </form>
+        {localStorage.getItem('token') ? <LoginSuccess /> : null}
       </div>
     )
   }

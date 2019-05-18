@@ -23,9 +23,7 @@ class Search extends Component {
     throttleTimer: null
   };
 
-  componentDidMount() {
-    // this.props.getData()
-  }
+ 
 
   search = e => {
     // clearTimeout(this.state.throttleTimer);
@@ -63,12 +61,10 @@ class Search extends Component {
     this.props.favoriteQuotes(update);
   };
 
-  saveSelectedFaves = () => {
-    // this.props.saveFavorites()
-  };
+  
 
   render() {
-    //   console.log(this.props.quotes)
+    
     const container = {
       width: "60%",
       margin: "16px auto",
@@ -82,15 +78,6 @@ class Search extends Component {
       textDecoration: "underline"
     };
 
-    // const quote = {
-    //   width: "60%",
-    //   border: "1px solid black",
-    //   borderRadius: "5px",
-    //   boxShadow: "5px 5px 5px #abcdf1",
-    //   textAlign: "center",
-    //   margin: "16px auto"
-    // };
-
     const p = {
       textAlign: "center"
     };
@@ -98,10 +85,7 @@ class Search extends Component {
     let blankStar = <img className="star" src={starEmpty} alt="Not Selected" />;
     let clickedStar = <img src={starFull} alt="Selected" />;
 
-    console.log(
-      "HEEEEEEEEEEEEEEEEEEEEREEEEEEEEEEE FIRST!~!",
-      this.props.quotes
-    );
+   
 
     // let characterSearchResultsByQuote =   this.props.quotes
     // // .filter(eachQuote => {
@@ -112,8 +96,7 @@ class Search extends Component {
     // //   );
     // });
 
-    console.log("LOOOOOKKKK!~! SECOND", this.props.quotes);
-    console.log(this.props.savedQuotes);
+   
     return (
       <div className="signupContainer">
         <form onSubmit={this.submitSearch}>
@@ -129,7 +112,7 @@ class Search extends Component {
             />
           </div>
         </form>
-        {/* <button onClick={this.saveSelectedFaves} className="registerButton">Save Your Chosen Favorites</button> */}
+        
         <br />
         {this.props.fetchingQuotes ? (
           <Loader type="Puff" color="#fed817" height={160} width={160} />

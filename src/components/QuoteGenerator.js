@@ -2,12 +2,14 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { getRandomQuotes } from '../actions/randomQuote'
 import axios from 'axios'
+import Loader from 'react-loader-spinner'
 
 class QuoteGenerator extends Component {
   state = {
     character: '',
     quotes: [],
-    name: 'homer'
+    name: 'homer',
+    fetching: false
   }
 
   handleChange = e => {
@@ -21,13 +23,23 @@ class QuoteGenerator extends Component {
 
   quoteRetrieval = event => {
     event.preventDefault();
+    this.setState({
+      fetching: !this.state.fetching
+    })
     axios
       .post(`https://simpson-says-backend.herokuapp.com/users/generate`, { genChar: this.state.name })
       .then(res =>{ 
         this.setState({
-          quotes: res.data
+          quotes: res.data,
+          fetching: !this.state.fetching
         })
         console.log(res)
+      })
+      .catch(err => {
+        console.log(err)
+        this.setState({
+          fetching: !this.state.fetching
+        })
       })
   }
 
@@ -48,6 +60,7 @@ class QuoteGenerator extends Component {
   
 
     return (
+      
       <div className="signupContainer">
         <form className="form-content">
           <div className="bar">
@@ -71,12 +84,16 @@ class QuoteGenerator extends Component {
               </div>
           </form>
 
-          {this.state.quotes.map(eachQuote => {
-           return( <div className="genQuote">
-            <p><strong>Character: </strong>{this.state.name}</p>
-            <p><strong>Quote: </strong>{eachQuote.quote}</p>
-            </div>)
-    })}
+          { this.state.fetching ? (<Loader type="Puff" color="#fed817" height={160} width={160} /> ) : (    
+            <>
+              {this.state.quotes.map(eachQuote => {
+                return( <div className="genQuote">
+              <p><strong>Character: </strong>{this.state.name}</p>
+              <p><strong>Quote: </strong>{eachQuote.quote}</p>
+              </div>)
+              })}
+            </>
+            )}
       </div>
     )
   }

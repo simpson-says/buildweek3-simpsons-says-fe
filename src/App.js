@@ -7,6 +7,8 @@ import Search from "./components/Search";
 import Favorites from "./components/Favorites";
 import Register from "./components/Register";
 import Login from "./components/Login";
+import LoginDetails from './components/LoginDetails'
+import RegisterDetails from './components/RegisterDetails'
 import simpsonSaysLogo from "./img/simpsonSaysLogo.png";
 
 class App extends Component {
@@ -41,13 +43,19 @@ class App extends Component {
               </Link>
             </div>
             <div className="third">
-            {localStorage.getItem("token") ?<div>User: {this.parseJwt(localStorage.getItem("token"))}</div>: ( <><Link className="link" to="/register">
+              {localStorage.getItem('token') ? 
+                <Link className="link" to='/login'>Log Out</Link> :
+                <>
+                <Link className="link" to="/register">
                 Register
               </Link>
               <Link className="link" to="/login">
                 Log In
-              </Link></>)}
+              </Link></>}
              
+{/* this was under className="Third" and ended after log In Link-    {localStorage.getItem("token") ?<div>User: {this.parseJwt(localStorage.getItem("token"))}</div>: ( <>
+</>)} */}
+
             </div>
           </div>
           <Route exact path="/register" component={Register} />
@@ -56,6 +64,8 @@ class App extends Component {
           {/* this is going to have addFavorite as part of it with a confirmation screen - get request for faves, put or post for add */}
           <Route exact path="/" component={Search} />
           <Route path="/generator" component={QuoteGenerator} />
+          <Route path='/loginstatus' component={LoginDetails} />
+          <Route path='/registerstatus' component={RegisterDetails} />
         </Router>
       </div>
     );

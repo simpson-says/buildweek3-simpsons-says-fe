@@ -3,15 +3,8 @@ import { connect } from "react-redux";
 import { getData, deleteData } from "../actions/quoteData";
 import { favoriteQuotes, saveFavorites } from "../actions/favorites";
 import Loader from "react-loader-spinner";
-import { dispatch } from "redux";
-import axiosWithAuth from "../utils/axiosWithAuth";
-import simpsonSaysLogo from "../img/simpsonSaysLogo.png";
 import "../App.css";
-import {
-  FETCH_QUOTES_START,
-  FETCH_QUOTES_SUCCESS,
-  FETCH_QUOTES_FAILURE
-} from "../actions/quoteData";
+
 import axios from "axios";
 import starEmpty from "../img/starEmpty.svg";
 import starFull from "../img/starFull.svg";

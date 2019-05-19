@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Route, Link, withRouter } from "react-router-dom";
+import { BrowserRouter as Router, Route, Link, NavLink, withRouter } from "react-router-dom";
 import "./App.css";
 import QuoteGenerator from "./components/QuoteGenerator";
 import Clouds from "./components/Clouds";
@@ -30,24 +30,7 @@ class App extends Component {
     return ;
 };
 
-    // componentDidUpdate(prevState) {
-    //   if (prevState.checkIfLoggedIn !== !this.state.checkIfLoggedIn) {
-    //     return console.log('hi')
-    //   }
-    // }
-
-
-    // logLink = () => {
-
-    //   return localStorage.getItem('token') ? this.setState({ loggedIn: true }) : null
-    //         }
-
-    // toggleLoginCheck = e => {
-    //   e.preventDefault()
-    //   this.setState({
-    //     checkIfLoggedIn: !this.state.checkIfLoggedIn
-    //   })
-    // }
+    
      
     logOutRedirect = e => {
       e.preventDefault();
@@ -56,56 +39,56 @@ class App extends Component {
     }
 
   render() {
-    // {this.logLink()}
+    
 
-    // console.log(this.state.loggedIn)
     return (
       <div className="App">
      
         <Clouds />
-        <Router>
+      
           <div className="navbar">
             <div className="third">
               <img className="navimg" src={simpsonSaysLogo} alt="logo" />
             </div>
 
             <div className="third">
-              <Link className="link" to="/">
+              <NavLink className="link" activeClassName="selectedPage" exact to="/">
                 Search for a Quote
-              </Link>
+              </NavLink>
 
-              <Link className="link" to="generator">
+              <NavLink className="link" activeClassName="selectedPage" to="/generator">
                 Quote Generator
-              </Link>
-              <Link className="link" to="/favorites">
+              </NavLink>
+              <NavLink className="link" activeClassName="selectedPage" to="/favorites">
                 Favorites
-              </Link>
+              </NavLink>
             </div>
             <div className="third">
-              
-              <Link className="link" to="/register">
-              Register
-              </Link>
-              <Link className="link" to="/login">
-              Log In
-              </Link>
-              <Link onClick={this.logOutRedirect} className="link" to='/login'>Log Out</Link> 
+              {localStorage.getItem('token') ? 
+              <NavLink onClick={this.logOutRedirect} className="link" activeClassName="selectedPage" to='/login'>Log Out</NavLink> :
+              <>
+                <NavLink className="link" activeClassName="selectedPage" to="/register">
+                Register
+                </NavLink>
+                <NavLink className="link" activeClassName="selectedPage" to="/login">
+                Log In
+                </NavLink>
+                </>
+              }
             
              
-{/* this was under className="Third" and ended after log In Link-    {localStorage.getItem("token") ?<div>User: {this.parseJwt(localStorage.getItem("token"))}</div>: ( <>
-</>)} */}
+
 
             </div>
           </div>
           <Route exact path="/register" render={(props) => <Register {...props} check={this.toggleLoginCheck} logLink={this.logLink} />} />
           <Route exact path="/login" component={Login} />
-          <Route path="/favorites" component={Favorites} logLink={this.logLink} />{" "}
-          {/* this is going to have addFavorite as part of it with a confirmation screen - get request for faves, put or post for add */}
+          <Route path="/favorites" component={Favorites} logLink={this.logLink} />
           <Route exact path="/" component={Search} />
           <Route path="/generator" component={QuoteGenerator} />
           <Route path='/loginstatus' component={LoginDetails} />
           <Route path='/registerstatus' component={RegisterDetails} />
-        </Router>
+        
       </div>
     );
   }

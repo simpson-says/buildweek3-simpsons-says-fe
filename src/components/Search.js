@@ -41,16 +41,11 @@ class Search extends Component {
     e.preventDefault();
     const searchValue = { searchValue: this.state.search };
     this.props.getData(searchValue);
-    // this.setState({
-    //     search: ''
-    // })
   };
 
   selectFavorite = selected => {
-    // console.log(id)
     console.log(selected);
     const update = { ...selected, liked: !selected.liked };
-    // console.log(copy)
     this.props.favoriteQuotes(update);
   };
 

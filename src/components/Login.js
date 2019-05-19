@@ -21,18 +21,10 @@ class Login extends Component {
         })
     }
     
-    // loginAndProps = (event) => {
-    //     event.preventDefault();
-    //     return (
-    //    this.login(event),
-    //    this.props.check(event),
-    //    this.props.logLink
-    //    )
-    //   }
+ 
     login = e => {
         e.preventDefault();
         this.props.login(this.state.credentials).then(() => {
-            // {localStorage.getItem('token') ? this.props.history.push('/') : alert('Login Failed!  Please try again.')}
             this.props.history.push('/loginstatus')
         })
     }
@@ -40,9 +32,6 @@ class Login extends Component {
     
     
     render() {
-        // console.log(this.props.check)
-       
-
     return (
       <div className="signupContainer">
         <form>

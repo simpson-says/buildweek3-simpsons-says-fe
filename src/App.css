@@ -79,6 +79,16 @@
   color: #fed817;
 }
 
+.selectedPage{
+  text-decoration: none;
+  width: 5%;
+  margin: 0 0 0 5px;
+  border-radius: 4px;
+  padding: 10px 10px;
+  background: #445048;
+  color: #fed817;
+}
+
 /* Register.js */
 .registerContainer {
   /* border: 1px solid #445048; */

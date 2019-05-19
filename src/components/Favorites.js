@@ -51,7 +51,7 @@ class Favorites extends Component {
 
 
   render() {
-    // console.log(this.state.quoteList)
+
     let blankStar = <img className="star" src={starEmpty} alt="Not Selected" />;
     let clickedStar = <img className="star" src={starFull} alt="Selected" />;
     const container = {
@@ -86,8 +86,7 @@ class Favorites extends Component {
       <div style={container}>
       {displayTest()}
       <>
-      {/* {this.state.fetching ?  <Loader type="Puff" color="#fed817" height={160} width={160} /> :
-    } */}
+     
 
         {this.state.quoteList.map((currentQuote) => {
           return (

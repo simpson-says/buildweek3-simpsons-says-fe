@@ -20,16 +20,18 @@ class Login extends Component {
             }
         })
     }
-
+    
+ 
     login = e => {
         e.preventDefault();
         this.props.login(this.state.credentials).then(() => {
-            // {localStorage.getItem('token') ? this.props.history.push('/') : alert('Login Failed!  Please try again.')}
             this.props.history.push('/loginstatus')
         })
     }
 
-  render() {
+    
+    
+    render() {
     return (
       <div className="signupContainer">
         <form>
@@ -55,7 +57,7 @@ class Login extends Component {
                 </div>
             <button className="button" onClick={this.login}>Log In</button>
         </form>
-        {/* {localStorage.getItem('token') ? <LoginDetails /> : null} */}
+        
       </div>
     )
   }
